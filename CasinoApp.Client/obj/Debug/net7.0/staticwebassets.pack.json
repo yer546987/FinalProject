@@ -933,6 +933,10 @@
       "PackagePath": "staticwebassets\\vendor\\fontawesome-free\\metadata\\sponsors.yml"
     },
     {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client\\wwwroot\\vendor\\fontawesome-free\\package-lock.json",
+      "PackagePath": "staticwebassets\\vendor\\fontawesome-free\\package-lock.json"
+    },
+    {
       "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client\\wwwroot\\vendor\\fontawesome-free\\package.json",
       "PackagePath": "staticwebassets\\vendor\\fontawesome-free\\package.json"
     },

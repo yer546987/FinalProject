@@ -3854,6 +3854,21 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "CasinoApp.Aplication/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "CasinoApp.Entities": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.13",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.13"
+        },
+        "compile": {
+          "bin/placeholder/CasinoApp.Aplication.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CasinoApp.Aplication.dll": {}
+        }
+      },
       "CasinoApp.Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -11214,6 +11229,11 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "CasinoApp.Aplication/1.0.0": {
+      "type": "project",
+      "path": "../CasinoApp.Aplication/CasinoApp.Aplication.csproj",
+      "msbuildProject": "../CasinoApp.Aplication/CasinoApp.Aplication.csproj"
+    },
     "CasinoApp.Entities/1.0.0": {
       "type": "project",
       "path": "../CasinoAppEntities/CasinoApp.Entities.csproj",
@@ -11222,6 +11242,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "CasinoApp.Aplication >= 1.0.0",
       "CasinoApp.Entities >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.12",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.9"
@@ -11260,6 +11281,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Aplication\\CasinoApp.Aplication.csproj": {
+              "projectPath": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Aplication\\CasinoApp.Aplication.csproj"
+            },
             "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoAppEntities\\CasinoApp.Entities.csproj": {
               "projectPath": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoAppEntities\\CasinoApp.Entities.csproj"
             }

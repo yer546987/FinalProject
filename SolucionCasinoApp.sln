@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasinoApp.Entities", "Casin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasinoApp.Aplication", "CasinoApp.Aplication\CasinoApp.Aplication.csproj", "{3E0FFCFB-3631-44F5-9D2E-AB896305D329}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasinoApp.Client", "CasinoApp.Client\CasinoApp.Client.csproj", "{8F2E6125-0392-4087-B732-9C88EEAB33A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasinoApp.Client.Mvc", "CasinoApp.Client.Mvc\CasinoApp.Client.Mvc.csproj", "{2EFBC22C-22F6-415A-B11D-DBB6FA0284ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{3E0FFCFB-3631-44F5-9D2E-AB896305D329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E0FFCFB-3631-44F5-9D2E-AB896305D329}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E0FFCFB-3631-44F5-9D2E-AB896305D329}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F2E6125-0392-4087-B732-9C88EEAB33A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F2E6125-0392-4087-B732-9C88EEAB33A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F2E6125-0392-4087-B732-9C88EEAB33A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F2E6125-0392-4087-B732-9C88EEAB33A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EFBC22C-22F6-415A-B11D-DBB6FA0284ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EFBC22C-22F6-415A-B11D-DBB6FA0284ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EFBC22C-22F6-415A-B11D-DBB6FA0284ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EFBC22C-22F6-415A-B11D-DBB6FA0284ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

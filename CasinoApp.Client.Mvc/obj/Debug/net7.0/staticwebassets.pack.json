@@ -1,0 +1,313 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\CasinoApp.Client.Mvc.bundle.scp.css",
+      "PackagePath": "staticwebassets\\CasinoApp.Client.Mvc.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\sb-admin-2.css",
+      "PackagePath": "staticwebassets\\css\\sb-admin-2.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\sb-admin-2.min.css",
+      "PackagePath": "staticwebassets\\css\\sb-admin-2.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\img\\Employed.jpg",
+      "PackagePath": "staticwebassets\\img\\Employed.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\img\\undraw_posting_photo.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_posting_photo.svg"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\img\\undraw_profile.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile.svg"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\img\\undraw_profile_1.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile_1.svg"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\img\\undraw_profile_2.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile_2.svg"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\img\\undraw_profile_3.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_profile_3.svg"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\img\\undraw_rocket.svg",
+      "PackagePath": "staticwebassets\\img\\undraw_rocket.svg"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\js\\demo\\chart-area-demo.js",
+      "PackagePath": "staticwebassets\\js\\demo\\chart-area-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\js\\demo\\chart-bar-demo.js",
+      "PackagePath": "staticwebassets\\js\\demo\\chart-bar-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\js\\demo\\chart-pie-demo.js",
+      "PackagePath": "staticwebassets\\js\\demo\\chart-pie-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\js\\demo\\datatables-demo.js",
+      "PackagePath": "staticwebassets\\js\\demo\\datatables-demo.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\js\\sb-admin-2.js",
+      "PackagePath": "staticwebassets\\js\\sb-admin-2.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\js\\sb-admin-2.min.js",
+      "PackagePath": "staticwebassets\\js\\sb-admin-2.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_buttons.scss",
+      "PackagePath": "staticwebassets\\scss\\_buttons.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_cards.scss",
+      "PackagePath": "staticwebassets\\scss\\_cards.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_charts.scss",
+      "PackagePath": "staticwebassets\\scss\\_charts.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_dropdowns.scss",
+      "PackagePath": "staticwebassets\\scss\\_dropdowns.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_error.scss",
+      "PackagePath": "staticwebassets\\scss\\_error.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_footer.scss",
+      "PackagePath": "staticwebassets\\scss\\_footer.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_global.scss",
+      "PackagePath": "staticwebassets\\scss\\_global.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_login.scss",
+      "PackagePath": "staticwebassets\\scss\\_login.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_mixins.scss",
+      "PackagePath": "staticwebassets\\scss\\_mixins.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_navs.scss",
+      "PackagePath": "staticwebassets\\scss\\_navs.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_utilities.scss",
+      "PackagePath": "staticwebassets\\scss\\_utilities.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\_variables.scss",
+      "PackagePath": "staticwebassets\\scss\\_variables.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\navs\\_global.scss",
+      "PackagePath": "staticwebassets\\scss\\navs\\_global.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\navs\\_sidebar.scss",
+      "PackagePath": "staticwebassets\\scss\\navs\\_sidebar.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\navs\\_topbar.scss",
+      "PackagePath": "staticwebassets\\scss\\navs\\_topbar.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\sb-admin-2.scss",
+      "PackagePath": "staticwebassets\\scss\\sb-admin-2.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\utilities\\_animation.scss",
+      "PackagePath": "staticwebassets\\scss\\utilities\\_animation.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\utilities\\_background.scss",
+      "PackagePath": "staticwebassets\\scss\\utilities\\_background.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\utilities\\_border.scss",
+      "PackagePath": "staticwebassets\\scss\\utilities\\_border.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\utilities\\_display.scss",
+      "PackagePath": "staticwebassets\\scss\\utilities\\_display.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\utilities\\_progress.scss",
+      "PackagePath": "staticwebassets\\scss\\utilities\\_progress.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\utilities\\_rotate.scss",
+      "PackagePath": "staticwebassets\\scss\\utilities\\_rotate.scss"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\scss\\utilities\\_text.scss",
+      "PackagePath": "staticwebassets\\scss\\utilities\\_text.scss"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.CasinoApp.Client.Mvc.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.CasinoApp.Client.Mvc.props",
+      "PackagePath": "build\\CasinoApp.Client.Mvc.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.CasinoApp.Client.Mvc.props",
+      "PackagePath": "buildMultiTargeting\\CasinoApp.Client.Mvc.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.CasinoApp.Client.Mvc.props",
+      "PackagePath": "buildTransitive\\CasinoApp.Client.Mvc.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

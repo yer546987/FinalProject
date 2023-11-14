@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CasinoApp.Aplication\CasinoApp.Aplication.csproj" />
     <ProjectReference Include="..\CasinoAppEntities\CasinoApp.Entities.csproj" />
   </ItemGroup>
 
