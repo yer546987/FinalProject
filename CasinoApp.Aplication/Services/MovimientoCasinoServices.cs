@@ -43,7 +43,7 @@ namespace CasinoApp.Aplication.Services
                     HoraRegistro = result.Entity.HoraRegistro,
                     IdEmpleado = result.Entity.IdEmpleado,
                     IdTipoComida = result.Entity.IdTipoComida,
-                    IdGrupoEmpleado = result.Entity.IdGrupoEmpleado,
+                    IdGrupoEmpleado = result.Entity.IdGrupoEmpleado
 
                 };
                 return RequestResult<MovimientoCasinoDto>.CreateSuccess(resultado);
