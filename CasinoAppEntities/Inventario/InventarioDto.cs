@@ -8,7 +8,7 @@ namespace CasinoApp.Entities.Inventario
 {
     public class InventarioDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Producto { get; set; }
 
@@ -16,13 +16,13 @@ namespace CasinoApp.Entities.Inventario
 
         public int Stock { get; set; }
 
-        public Guid IdUnidadMedida { get; set; }
+        public int IdUnidadMedida { get; set; }
 
         public double Cantidad { get; set; }
 
         public string Mecatos { get; set; }
 
-        public Guid IdInventario { get; set; }
+        public int IdInventario { get; set; }
 
     }
 }
