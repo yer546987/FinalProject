@@ -8,7 +8,7 @@ namespace CasinoApp.Entities.TipoDocumento
 {
     public class TipoDocumentoDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string TipoIdentificacion { get; set; }
     }

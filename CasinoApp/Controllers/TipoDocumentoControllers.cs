@@ -1,4 +1,4 @@
-﻿using CasinoApp.Application.Services;
+﻿using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.TipoDocumento;
 using Microsoft.AspNetCore.Http;
@@ -37,7 +37,7 @@ namespace CasinoApp.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<TipoDocumentoDto> GetById([FromRoute] Guid id)
+        public RequestResult<TipoDocumentoDto> GetById([FromRoute] int id)
         {
             return services.GetById(id);
         }
