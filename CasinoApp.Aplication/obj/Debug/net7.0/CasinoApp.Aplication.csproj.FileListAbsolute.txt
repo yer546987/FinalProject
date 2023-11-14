@@ -1,0 +1,17 @@
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\bin\Debug\net7.0\CasinoApp.Aplication.deps.json
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\bin\Debug\net7.0\CasinoApp.Aplication.runtimeconfig.json
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\bin\Debug\net7.0\CasinoApp.Aplication.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\bin\Debug\net7.0\CasinoApp.Aplication.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\bin\Debug\net7.0\CasinoApp.Entities.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\bin\Debug\net7.0\CasinoApp.Entities.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.csproj.AssemblyReference.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.AssemblyInfoInputs.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.AssemblyInfo.cs
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.csproj.CoreCompileInputs.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.csproj.CopyComplete
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\refint\CasinoApp.Aplication.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\CasinoApp.Aplication.genruntimeconfig.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Aplication\obj\Debug\net7.0\ref\CasinoApp.Aplication.dll

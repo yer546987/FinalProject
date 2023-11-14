@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "SA3wiBH7c/9TjEHyw9IRBJilJG/SayOPdVniOkKNYvmBIxPpz7AxO2fu3s8yqJ0ntqJCmFoQI1SxgLl7ZrRaLw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Cliente.AppMvc\\CasinoApp.Cliente.AppMvc.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yeferson Beltran M\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.13\\microsoft.aspnetcore.openapi.7.0.13.nupkg.sha512",
+    "C:\\Users\\Yeferson Beltran M\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Yeferson Beltran M\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\Yeferson Beltran M\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Yeferson Beltran M\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Yeferson Beltran M\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\Yeferson Beltran M\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

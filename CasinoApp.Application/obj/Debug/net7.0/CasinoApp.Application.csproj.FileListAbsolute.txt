@@ -1,0 +1,17 @@
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\bin\Debug\net7.0\CasinoApp.Application.deps.json
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\bin\Debug\net7.0\CasinoApp.Application.runtimeconfig.json
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\bin\Debug\net7.0\CasinoApp.Application.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\bin\Debug\net7.0\CasinoApp.Application.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.csproj.AssemblyReference.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.AssemblyInfoInputs.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.AssemblyInfo.cs
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.csproj.CoreCompileInputs.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\refint\CasinoApp.Application.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.genruntimeconfig.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\ref\CasinoApp.Application.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\bin\Debug\net7.0\CasinoApp.Entities.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\bin\Debug\net7.0\CasinoApp.Entities.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoApp.Application\obj\Debug\net7.0\CasinoApp.Application.csproj.CopyComplete

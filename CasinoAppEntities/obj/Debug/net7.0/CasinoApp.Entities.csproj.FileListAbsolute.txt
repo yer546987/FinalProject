@@ -1,0 +1,14 @@
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\bin\Debug\net7.0\CasinoApp.Entities.deps.json
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\bin\Debug\net7.0\CasinoApp.Entities.runtimeconfig.json
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\bin\Debug\net7.0\CasinoApp.Entities.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\bin\Debug\net7.0\CasinoApp.Entities.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.csproj.AssemblyReference.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.AssemblyInfoInputs.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.AssemblyInfo.cs
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\refint\CasinoApp.Entities.dll
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.pdb
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\CasinoApp.Entities.genruntimeconfig.cache
+C:\Users\Yeferson Beltran M\source\repos\SolucionCasinoApp\CasinoAppEntities\obj\Debug\net7.0\ref\CasinoApp.Entities.dll
