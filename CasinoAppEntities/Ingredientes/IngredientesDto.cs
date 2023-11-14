@@ -9,9 +9,9 @@ namespace CasinoApp.Entities.Ingredientes
     public class IngredientesDto
     {
         public int Id { get; set; }
-        public Guid IdUnidadPesaje { get; set; }
+        public int IdUnidadPesaje { get; set; }
         public string Cantidad { get; set; }
-        public Guid IdInventario { get; set; }
+        public int IdInventario { get; set; }
         public string NombreUnidadPesaje { get; set; }
 
     }

@@ -4,7 +4,7 @@ using CasinoApp.Entities.MovimientoCasino;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers
+namespace CasinoApp.Api.Controllers.ParametrosCasino
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,7 +12,7 @@ namespace CasinoApp.Api.Controllers
     {
         private MovimientoCasinoServices _services;
 
-        public MovimientoCasinoController() 
+        public MovimientoCasinoController()
         {
             _services = new MovimientoCasinoServices();
         }
@@ -22,7 +22,7 @@ namespace CasinoApp.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public RequestResult<List<MovimientoCasinoDto>> GetAll() 
+        public RequestResult<List<MovimientoCasinoDto>> GetAll()
         {
             return _services.GetAll();
         }
@@ -34,7 +34,7 @@ namespace CasinoApp.Api.Controllers
         /// <returns></returns> 
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<MovimientoCasinoDto> GetById([FromRoute] int id) 
+        public RequestResult<MovimientoCasinoDto> GetById([FromRoute] int id)
         {
             return _services.GetById(id);
         }

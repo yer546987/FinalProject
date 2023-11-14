@@ -1,21 +1,22 @@
-﻿using CasinoApp.Application.Services;
-using CasinoApp.Entities.GrupoEmpleado;
+﻿using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Http;
+using CasinoApp.Entities.Inventario;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers
+namespace CasinoApp.Api.Controllers.ParametrosCasino
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GrupoEmpleadoControllers : ControllerBase
+    public class InventarioControllers : ControllerBase
     {
-        private GrupoEmpleadoServices services;
+        private InventarioServices services;
 
-        public GrupoEmpleadoControllers() 
+        public InventarioControllers()
         {
-            services = new GrupoEmpleadoServices();
+            services = new InventarioServices();
         }
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace CasinoApp.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public RequestResult<List<GrupoEmpleadoDto>> GetAll()
+        public RequestResult<List<InventarioDto>> GetAll()
         {
             return services.GetAll();
         }
@@ -36,28 +37,28 @@ namespace CasinoApp.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<GrupoEmpleadoDto> GetById([FromRoute] int id)
+        public RequestResult<InventarioDto> GetById([FromRoute] int id)
         {
             return services.GetById(id);
         }
 
         [HttpPost]
-        public RequestResult<GrupoEmpleadoDto> Create([FromBody] GrupoEmpleadoDto grupoEmpleado)
+        public RequestResult<InventarioDto> Create([FromBody] InventarioDto inventario)
         {
             if (ModelState.IsValid)
             {
-                return services.Create(grupoEmpleado);
+                return services.Create(inventario);
             }
-            return RequestResult<GrupoEmpleadoDto>.CreateNoSuccess("El modelo no es valido");
+            return RequestResult<InventarioDto>.CreateNoSuccess("El modelo no es valido");
         }
 
 
         [HttpPut]
-        public GrupoEmpleadoDto Update([FromBody] GrupoEmpleadoDto grupoEmpleado)
+        public InventarioDto Update([FromBody] InventarioDto inventario)
         {
             if (ModelState.IsValid)
             {
-                return services.Update(grupoEmpleado);
+                return services.Update(inventario);
             }
             return null;
         }

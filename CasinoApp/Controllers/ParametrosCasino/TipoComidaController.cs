@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers
+namespace CasinoApp.Api.Controllers.ParametrosCasino
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -13,7 +13,7 @@ namespace CasinoApp.Api.Controllers
     {
         private TipoComidaServices services;
 
-        public TipoComidaController() 
+        public TipoComidaController()
         {
             services = new TipoComidaServices();
         }

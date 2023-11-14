@@ -1,22 +1,22 @@
 ﻿using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Http;
-using CasinoApp.Entities.TipoDocumento;
+using CasinoApp.Entities.UnidadMedida;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers
+namespace CasinoApp.Api.Controllers.ParametrosCasino
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoDocumentoControllers : Controller 
+    public class UnidadMedidaController : Controller
     {
-        private TipoDocumentoServices services;
+        private UnidadMedidaServices services;
 
-        public TipoDocumentoControllers() 
+        public UnidadMedidaController()
         {
-            services = new TipoDocumentoServices();
+            services = new UnidadMedidaServices();
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace CasinoApp.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public RequestResult<List<TipoDocumentoDto>> GetAll()
+        public RequestResult<List<UnidadMedidaDto>> GetAll()
         {
             return services.GetAll();
         }
@@ -37,28 +37,28 @@ namespace CasinoApp.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<TipoDocumentoDto> GetById([FromRoute] int id)
+        public RequestResult<UnidadMedidaDto> GetById([FromRoute] int id)
         {
             return services.GetById(id);
         }
 
         [HttpPost]
-        public RequestResult<TipoDocumentoDto> Create([FromBody] TipoDocumentoDto tipoDocumento)
+        public RequestResult<UnidadMedidaDto> Create([FromBody] UnidadMedidaDto unidadMedida)
         {
             if (ModelState.IsValid)
             {
-                return services.Create(tipoDocumento);
+                return services.Create(unidadMedida);
             }
-            return RequestResult<TipoDocumentoDto>.CreateNoSuccess("El modelo no es valido");
+            return RequestResult<UnidadMedidaDto>.CreateNoSuccess("El modelo no es valido");
         }
 
 
         [HttpPut]
-        public TipoDocumentoDto Update([FromBody] TipoDocumentoDto tipoDocumento)
+        public UnidadMedidaDto Update([FromBody] UnidadMedidaDto unidadMedida)
         {
             if (ModelState.IsValid)
             {
-                return services.Update(tipoDocumento);
+                return services.Update(unidadMedida);
             }
             return null;
         }

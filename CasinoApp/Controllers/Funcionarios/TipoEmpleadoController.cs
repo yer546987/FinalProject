@@ -1,30 +1,30 @@
-﻿using CasinoApp.Application.Services;
-using CasinoApp.Entities.CostoCasino;
-using CasinoApp.Entities.Empleado;
+﻿using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Http;
+using CasinoApp.Entities.TipoComida;
+using CasinoApp.Entities.TipoEmpleado;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers
+namespace CasinoApp.Api.Controllers.Funcionarios
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CostoCasinoController : Controller 
+    public class TipoEmpleadoController : ControllerBase
     {
-        private CostoCasinoController services;
-        public CostoCasinoController()
-        {
-            services = new CostoCasinoController();
-        }
+        private TipoEmpleadoServices services;
 
+        public TipoEmpleadoController()
+        {
+            services = new TipoEmpleadoServices();
+        }
 
         /// <summary>
         /// Este metodo retorna todas las especies registradas
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public RequestResult<List<CostoCasinoDto>> GetAll()
+        public RequestResult<List<TipoEmpleadoDto>> GetAll()
         {
             return services.GetAll();
         }
@@ -37,28 +37,28 @@ namespace CasinoApp.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<CostoCasinoDto> GetById([FromRoute] int id)
+        public RequestResult<TipoEmpleadoDto> GetById([FromRoute] int id)
         {
             return services.GetById(id);
         }
 
         [HttpPost]
-        public RequestResult<CostoCasinoDto> Create([FromBody] CostoCasinoDto costoCasino)
+        public RequestResult<TipoEmpleadoDto> Create([FromBody] TipoEmpleadoDto tipoEmpleado)
         {
             if (ModelState.IsValid)
             {
-                return services.Create(costoCasino);
+                return services.Create(tipoEmpleado);
             }
-            return RequestResult<CostoCasinoDto>.CreateNoSuccess("El modelo no es valido");
+            return RequestResult<TipoEmpleadoDto>.CreateNoSuccess("El modelo no es valido");
         }
 
 
         [HttpPut]
-        public CostoCasinoDto Update([FromBody] CostoCasinoDto costoCasino)
+        public TipoEmpleadoDto Update([FromBody] TipoEmpleadoDto tipoEmpleado)
         {
             if (ModelState.IsValid)
             {
-                return services.Update(costoCasino);
+                return services.Update(tipoEmpleado);
             }
             return null;
         }

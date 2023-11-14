@@ -1,19 +1,22 @@
 ﻿using CasinoApp.Application.Services;
 using CasinoApp.Entities.Empleado;
 using CasinoApp.Entities.Http;
+using CasinoApp.Entities.Ingredientes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers
+namespace CasinoApp.Api.Controllers.ParametrosCasino
 {
     [Route("api/[controller]")]
-    public class EmpleadoController : Controller
+    [ApiController]
+    public class IngredientesController : Controller
     {
-        private EmpleadoServices services;
-        public EmpleadoController()
+        private IngredientesServices services;
+        public IngredientesController()
         {
-            services = new EmpleadoServices();
+            services = new IngredientesServices();
         }
 
 
@@ -22,7 +25,7 @@ namespace CasinoApp.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public RequestResult<List<EmpleadoDto>> GetAll()
+        public RequestResult<List<IngredientesDto>> GetAll()
         {
             return services.GetAll();
         }
@@ -35,28 +38,28 @@ namespace CasinoApp.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<EmpleadoDto> GetById([FromRoute] int id)
+        public RequestResult<IngredientesDto> GetById([FromRoute] Guid id)
         {
             return services.GetById(id);
         }
 
         [HttpPost]
-        public RequestResult<EmpleadoDto> Create([FromBody] EmpleadoDto empleado)
+        public RequestResult<IngredientesDto> Create([FromBody] IngredientesDto ingredientes)
         {
             if (ModelState.IsValid)
             {
-                return services.Create(empleado);
+                return services.Create(ingredientes);
             }
-            return RequestResult<EmpleadoDto>.CreateNoSuccess("El modelo no es valido");
+            return RequestResult<IngredientesDto>.CreateNoSuccess("El modelo no es valido");
         }
 
 
         [HttpPut]
-        public EmpleadoDto Update([FromBody] EmpleadoDto especie)
+        public IngredientesDto Update([FromBody] IngredientesDto ingredientes)
         {
             if (ModelState.IsValid)
             {
-                return services.Update(especie);
+                return services.Update(ingredientes);
             }
             return null;
         }
