@@ -1,4 +1,4 @@
-﻿using CasinoApp.Application.Services;
+﻿using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.MovimientoCasino;
 using Microsoft.AspNetCore.Mvc;

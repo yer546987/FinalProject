@@ -13,7 +13,7 @@ namespace CasinoApp.Entities.MovimientoCasino
         public int IdTipoComida { get; set; }
         public int IdGrupoEmpleado { get; set; }
         public DateTime HoraRegistro { get; set; }
-        public Guid IdEmpleado { get; set; }
+        public int IdEmpleado { get; set; }
         public string NombreEmpleado { get; set; }
         public string NombreGrupoEmpleado { get; set; }
         public string NombreTipoComida { get; set; }

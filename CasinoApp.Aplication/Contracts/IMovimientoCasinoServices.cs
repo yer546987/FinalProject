@@ -10,11 +10,11 @@ namespace CasinoApp.Aplication.Contracts
 {
     public interface IMovimientoCasinoServices
     {
-        public MovimientoCasinoDto Update(MovimientoCasinoDto especie);
+        public MovimientoCasinoDto Update(MovimientoCasinoDto movimientoCasino);
         public bool Delete(int idMovimientoCasino);
 
         public RequestResult<List<MovimientoCasinoDto>> GetAll();
         public RequestResult<MovimientoCasinoDto> GetById(int idMovimientoCasino);
-        RequestResult<MovimientoCasinoDto> Create(MovimientoCasinoDto especie);
+        RequestResult<MovimientoCasinoDto> Create(MovimientoCasinoDto movimientoCasino);
     }
 }
