@@ -9,7 +9,7 @@ namespace CasinoApp.Entities.CostoCasino
     public class CostoCasinoDto
     {
         public int IdCostoCasino { get; set; }
-        public string? PrecioC { get; set; }
+        public double? PrecioC { get; set; }
         public int IdTipoComida { get; set; }
         public int IdGrupoEmpleado { get; set; }
         public string NombreGrupoEmpleado { get; set; }

@@ -1,4 +1,4 @@
-﻿using CasinoApp.Application.Services;
+﻿using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Empleado;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.Ingredientes;
@@ -38,7 +38,7 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<IngredientesDto> GetById([FromRoute] Guid id)
+        public RequestResult<IngredientesDto> GetById([FromRoute] int id)
         {
             return services.GetById(id);
         }

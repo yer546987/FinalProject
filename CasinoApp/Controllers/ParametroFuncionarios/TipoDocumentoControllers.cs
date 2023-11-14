@@ -1,21 +1,22 @@
 ﻿using CasinoApp.Aplication.Services;
-using CasinoApp.Entities.GrupoEmpleado;
 using CasinoApp.Entities.Http;
+using CasinoApp.Entities.TipoDocumento;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers.Funcionarios
+namespace CasinoApp.Api.Controllers.ParametrosFuncionarios
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GrupoEmpleadoControllers : ControllerBase
+    public class TipoDocumentoControllers : Controller
     {
-        private GrupoEmpleadoServices services;
+        private TipoDocumentoServices services;
 
-        public GrupoEmpleadoControllers()
+        public TipoDocumentoControllers()
         {
-            services = new GrupoEmpleadoServices();
+            services = new TipoDocumentoServices();
         }
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace CasinoApp.Api.Controllers.Funcionarios
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public RequestResult<List<GrupoEmpleadoDto>> GetAll()
+        public RequestResult<List<TipoDocumentoDto>> GetAll()
         {
             return services.GetAll();
         }
@@ -36,28 +37,28 @@ namespace CasinoApp.Api.Controllers.Funcionarios
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public RequestResult<GrupoEmpleadoDto> GetById([FromRoute] int id)
+        public RequestResult<TipoDocumentoDto> GetById([FromRoute] int id)
         {
             return services.GetById(id);
         }
 
         [HttpPost]
-        public RequestResult<GrupoEmpleadoDto> Create([FromBody] GrupoEmpleadoDto grupoEmpleado)
+        public RequestResult<TipoDocumentoDto> Create([FromBody] TipoDocumentoDto tipoDocumento)
         {
             if (ModelState.IsValid)
             {
-                return services.Create(grupoEmpleado);
+                return services.Create(tipoDocumento);
             }
-            return RequestResult<GrupoEmpleadoDto>.CreateNoSuccess("El modelo no es valido");
+            return RequestResult<TipoDocumentoDto>.CreateNoSuccess("El modelo no es valido");
         }
 
 
         [HttpPut]
-        public GrupoEmpleadoDto Update([FromBody] GrupoEmpleadoDto grupoEmpleado)
+        public TipoDocumentoDto Update([FromBody] TipoDocumentoDto tipoDocumento)
         {
             if (ModelState.IsValid)
             {
-                return services.Update(grupoEmpleado);
+                return services.Update(tipoDocumento);
             }
             return null;
         }
