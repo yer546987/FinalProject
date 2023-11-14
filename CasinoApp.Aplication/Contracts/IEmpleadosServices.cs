@@ -14,7 +14,7 @@ namespace CasinoApp.Aplication.Contracts
         public bool Delete(int idEmpleado);
 
         public RequestResult<List<EmpleadoDto>> GetAll();
-        public RequestResult<EmpleadoDto> GetById(int idEmpleado);
+        public RequestResult<EmpleadoDto> GetById(string NombreEmpleado);
         RequestResult<EmpleadoDto> Create(EmpleadoDto empleado);
     }
 }

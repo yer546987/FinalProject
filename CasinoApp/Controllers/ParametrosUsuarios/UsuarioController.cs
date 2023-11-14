@@ -1,4 +1,5 @@
-﻿using CasinoApp.Entities.Http;
+﻿using CasinoApp.Aplication.Services;
+using CasinoApp.Entities.Http;
 using CasinoApp.Entities.Usuario;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,10 @@ namespace CasinoApp.Api.Controllers.ParametrosUsuarios
     [ApiController]
     public class UsuarioController : Controller
     {
-        private UsuarioController services;
+        private UsuariosServices services;
         public UsuarioController()
         {
-            services = new UsuarioController();
+            services = new UsuariosServices();
         }
 
         /// <summary>

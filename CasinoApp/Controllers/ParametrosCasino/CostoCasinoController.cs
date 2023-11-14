@@ -1,4 +1,5 @@
-﻿using CasinoApp.Entities.CostoCasino;
+﻿using CasinoApp.Aplication.Services;
+using CasinoApp.Entities.CostoCasino;
 using CasinoApp.Entities.Empleado;
 using CasinoApp.Entities.Http;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +12,10 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
     [ApiController]
     public class CostoCasinoController : Controller
     {
-        private CostoCasinoController services;
+        private CostoCasinoServices services;
         public CostoCasinoController()
         {
-            services = new CostoCasinoController();
+            services = new CostoCasinoServices();
         }
 
 

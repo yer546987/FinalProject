@@ -92,12 +92,12 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public RequestResult<EmpleadoDto> GetById(int idEmpleado)
+        public RequestResult<EmpleadoDto> GetById(string NombreEmpleado)
         {
             try
             {
-                var empleado = _Context.Empleados.Where(x => x.Id == idEmpleado).FirstOrDefault();
-                if (empleado is null) return RequestResult<EmpleadoDto>.CreateNoSuccess($"No existe el empleado con identificador {idEmpleado}");
+                var empleado = _Context.Empleados.Where(x => x.Nombre == NombreEmpleado || x.Apellido == NombreEmpleado).FirstOrDefault();
+                if (empleado is null) return RequestResult<EmpleadoDto>.CreateNoSuccess($"No existe el empleado con nombre {NombreEmpleado}");
                 var resultado = new EmpleadoDto()
                 {
                     NombreEmpleado = empleado.Nombre,

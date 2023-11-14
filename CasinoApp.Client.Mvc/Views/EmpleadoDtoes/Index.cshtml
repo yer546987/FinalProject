@@ -1,0 +1,90 @@
+﻿@model IEnumerable<CasinoApp.Entities.Empleado.EmpleadoDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_ViewImports.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreEmpleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoIdentificacionE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentificacionE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoEmpleadoE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdGrupoEE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InternoE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreGrupoEmpleadoE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreTipoEmpleadoE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreTipoIdentificacionE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEmpleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidoE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipoIdentificacionE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentificacionE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipoEmpleadoE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdGrupoEE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InternoE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreGrupoEmpleadoE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreTipoEmpleadoE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreTipoIdentificacionE)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdEmpleado">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdEmpleado">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEmpleado">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

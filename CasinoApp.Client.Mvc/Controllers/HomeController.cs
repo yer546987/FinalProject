@@ -1,6 +1,10 @@
-﻿using CasinoApp.Client.Mvc.Models;
+﻿using CasinoApp.Client.Helper;
+using CasinoApp.Client.Mvc.Models;
+using CasinoApp.Entities.Empleado;
+using CasinoApp.Entities.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace CasinoApp.Client.Mvc.Controllers
@@ -16,6 +20,7 @@ namespace CasinoApp.Client.Mvc.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

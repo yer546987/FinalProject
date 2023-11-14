@@ -10,11 +10,11 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
     [ApiController]
     public class MovimientoCasinoController : Controller
     {
-        private MovimientoCasinoServices _services;
+        private MovimientoCasinoServices services;
 
         public MovimientoCasinoController()
         {
-            _services = new MovimientoCasinoServices();
+            services = new MovimientoCasinoServices();
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         [HttpGet]
         public RequestResult<List<MovimientoCasinoDto>> GetAll()
         {
-            return _services.GetAll();
+            return services.GetAll();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         [Route("{id}")]
         public RequestResult<MovimientoCasinoDto> GetById([FromRoute] int id)
         {
-            return _services.GetById(id);
+            return services.GetById(id);
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         {
             if (ModelState.IsValid)
             {
-                return _services.Create(movimientoCasino);
+                return services.Create(movimientoCasino);
             }
             return RequestResult<MovimientoCasinoDto>.CreateNoSuccess("El modelo no es valido");
         }
@@ -55,7 +55,7 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         {
             if (ModelState.IsValid)
             {
-                return _services.Update(movimientoCasino);
+                return services.Update(movimientoCasino);
             }
             return null;
         }

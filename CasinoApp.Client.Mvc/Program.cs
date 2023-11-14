@@ -1,8 +1,14 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using CasinoApp.Client.Mvc.Data;
+using Microsoft.Extensions.Configuration;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<CasinoAppClientMvcContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CasinoAppClientMvcContext") ?? throw new InvalidOperationException("Connection string 'CasinoAppClientMvcContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

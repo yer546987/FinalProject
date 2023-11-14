@@ -34,10 +34,10 @@ namespace CasinoApp.Api.Controllers
         /// <param name="id">Identificador de la especie</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{id}")]
-        public RequestResult<EmpleadoDto> GetById([FromRoute] int id)
+        [Route("{Nombre}")]
+        public RequestResult<EmpleadoDto> GetById([FromRoute] string Nombre)
         {
-            return services.GetById(id);
+            return services.GetById(Nombre);
         }
 
         [HttpPost]
