@@ -8,7 +8,7 @@ namespace CasinoApp.Entities.UnidadMedida
 {
     public class UnidadMedidaDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Nombre { get; set; }
     }
