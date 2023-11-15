@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CasinoApp.Client.Mvc.Data;
 using CasinoApp.Entities.Inventario;
+using CasinoApp.Client.Helper;
+using CasinoApp.Entities.Http;
+using CasinoApp.Entities.Ingredientes;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
 {
@@ -22,7 +25,13 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
         // GET: Inventario
         public async Task<IActionResult> Index()
         {
-              return View(await _context.InventarioDto.ToListAsync());
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<List<InventarioDto>>>("/api/InventarioControllers");
+            if (resultado.IsSuccessful)
+            {
+                return View(resultado.Result);
+            }
+            return NotFound();
         }
 
         // GET: Inventario/Details/5
