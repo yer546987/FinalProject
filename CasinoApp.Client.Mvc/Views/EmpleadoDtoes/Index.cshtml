@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/_ViewImports.cshtml";
+  
 }
 
 <h1>Index</h1>
@@ -34,15 +34,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.InternoE)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreGrupoEmpleadoE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreTipoEmpleadoE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreTipoIdentificacionE)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -69,15 +60,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InternoE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreGrupoEmpleadoE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreTipoEmpleadoE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreTipoIdentificacionE)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdEmpleado">Edit</a> |

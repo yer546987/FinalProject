@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/_ViewImports.cshtml";
 }
 
 <h1>Edit</h1>
@@ -48,21 +47,6 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="InternoE" /> @Html.DisplayNameFor(model => model.InternoE)
                 </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreGrupoEmpleadoE" class="control-label"></label>
-                <input asp-for="NombreGrupoEmpleadoE" class="form-control" />
-                <span asp-validation-for="NombreGrupoEmpleadoE" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreTipoEmpleadoE" class="control-label"></label>
-                <input asp-for="NombreTipoEmpleadoE" class="form-control" />
-                <span asp-validation-for="NombreTipoEmpleadoE" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreTipoIdentificacionE" class="control-label"></label>
-                <input asp-for="NombreTipoIdentificacionE" class="form-control" />
-                <span asp-validation-for="NombreTipoIdentificacionE" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

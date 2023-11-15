@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CasinoApp.Client.Mvc.Data;
 using CasinoApp.Entities.Empleado;
+using CasinoApp.Client.Helper;
+using CasinoApp.Entities.Http;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
 {
@@ -22,7 +24,13 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         // GET: EmpleadoDtoes
         public async Task<IActionResult> Index()
         {
-              return View(await _context.EmpleadoDto.ToListAsync());
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<List<EmpleadoDto>>>("/api/Empleado");
+            if (resultado.IsSuccessful)
+            {
+                return View(resultado.Result);
+            }
+            return NotFound();
         }
 
         // GET: EmpleadoDtoes/Details/5

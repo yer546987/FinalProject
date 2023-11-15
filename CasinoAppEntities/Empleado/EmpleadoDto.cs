@@ -18,11 +18,6 @@ namespace CasinoApp.Entities.Empleado
         public int IdTipoEmpleadoE { get; set; }
         public int IdGrupoEE { get; set; }
         public bool InternoE { get; set; }
-        public string NombreGrupoEmpleadoE { get; set; }
-
-        public string NombreTipoEmpleadoE { get; set; }
-
-        public string NombreTipoIdentificacionE { get; set; }
 
     }
 }
