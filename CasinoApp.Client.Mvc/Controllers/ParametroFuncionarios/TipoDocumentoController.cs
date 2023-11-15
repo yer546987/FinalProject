@@ -6,26 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CasinoApp.Client.Mvc.Data;
-using CasinoApp.Entities.Empleado;
+using CasinoApp.Entities.TipoDocumento;
 using CasinoApp.Client.Helper;
+using CasinoApp.Entities.GrupoEmpleado;
 using CasinoApp.Entities.Http;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
 {
-    public class EmpleadoDtoesController : Controller
+    public class TipoDocumentoController : Controller
     {
         private readonly CasinoAppClientMvcContext _context;
 
-        public EmpleadoDtoesController(CasinoAppClientMvcContext context)
+        public TipoDocumentoController(CasinoAppClientMvcContext context)
         {
             _context = context;
         }
 
-        // GET: EmpleadoDtoes
+        // GET: TipoDocumento
         public async Task<IActionResult> Index()
         {
             MVAHttpClient client = new MVAHttpClient();
-            var resultado = client.Get<RequestResult<List<EmpleadoDto>>>("/api/Empleado");
+            var resultado = client.Get<RequestResult<List<TipoDocumentoDto>>>("/api/TipoDocumentoControllers");
             if (resultado.IsSuccessful)
             {
                 return View(resultado.Result);
@@ -33,70 +34,70 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
             return NotFound();
         }
 
-        // GET: EmpleadoDtoes/Details/5
+        // GET: TipoDocumento/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.EmpleadoDto == null)
+            if (id == null || _context.TipoDocumentoDto == null)
             {
                 return NotFound();
             }
 
-            var empleadoDto = await _context.EmpleadoDto
-                .FirstOrDefaultAsync(m => m.IdEmpleado == id);
-            if (empleadoDto == null)
+            var tipoDocumentoDto = await _context.TipoDocumentoDto
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tipoDocumentoDto == null)
             {
                 return NotFound();
             }
 
-            return View(empleadoDto);
+            return View(tipoDocumentoDto);
         }
 
-        // GET: EmpleadoDtoes/Create
+        // GET: TipoDocumento/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: EmpleadoDtoes/Create
+        // POST: TipoDocumento/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEmpleado,NombreEmpleado,ApellidoE,IdTipoIdentificacionE,IdentificacionE,IdTipoEmpleadoE,IdGrupoEE,InternoE,NombreGrupoEmpleadoE,NombreTipoEmpleadoE,NombreTipoIdentificacionE")] EmpleadoDto empleadoDto)
+        public async Task<IActionResult> Create([Bind("Id,TipoIdentificacion")] TipoDocumentoDto tipoDocumentoDto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(empleadoDto);
+                _context.Add(tipoDocumentoDto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(empleadoDto);
+            return View(tipoDocumentoDto);
         }
 
-        // GET: EmpleadoDtoes/Edit/5
+        // GET: TipoDocumento/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.EmpleadoDto == null)
+            if (id == null || _context.TipoDocumentoDto == null)
             {
                 return NotFound();
             }
 
-            var empleadoDto = await _context.EmpleadoDto.FindAsync(id);
-            if (empleadoDto == null)
+            var tipoDocumentoDto = await _context.TipoDocumentoDto.FindAsync(id);
+            if (tipoDocumentoDto == null)
             {
                 return NotFound();
             }
-            return View(empleadoDto);
+            return View(tipoDocumentoDto);
         }
 
-        // POST: EmpleadoDtoes/Edit/5
+        // POST: TipoDocumento/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEmpleado,NombreEmpleado,ApellidoE,IdTipoIdentificacionE,IdentificacionE,IdTipoEmpleadoE,IdGrupoEE,InternoE,NombreGrupoEmpleadoE,NombreTipoEmpleadoE,NombreTipoIdentificacionE")] EmpleadoDto empleadoDto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TipoIdentificacion")] TipoDocumentoDto tipoDocumentoDto)
         {
-            if (id != empleadoDto.IdEmpleado)
+            if (id != tipoDocumentoDto.Id)
             {
                 return NotFound();
             }
@@ -105,12 +106,12 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
             {
                 try
                 {
-                    _context.Update(empleadoDto);
+                    _context.Update(tipoDocumentoDto);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmpleadoDtoExists(empleadoDto.IdEmpleado))
+                    if (!TipoDocumentoDtoExists(tipoDocumentoDto.Id))
                     {
                         return NotFound();
                     }
@@ -121,49 +122,49 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(empleadoDto);
+            return View(tipoDocumentoDto);
         }
 
-        // GET: EmpleadoDtoes/Delete/5
+        // GET: TipoDocumento/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.EmpleadoDto == null)
+            if (id == null || _context.TipoDocumentoDto == null)
             {
                 return NotFound();
             }
 
-            var empleadoDto = await _context.EmpleadoDto
-                .FirstOrDefaultAsync(m => m.IdEmpleado == id);
-            if (empleadoDto == null)
+            var tipoDocumentoDto = await _context.TipoDocumentoDto
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tipoDocumentoDto == null)
             {
                 return NotFound();
             }
 
-            return View(empleadoDto);
+            return View(tipoDocumentoDto);
         }
 
-        // POST: EmpleadoDtoes/Delete/5
+        // POST: TipoDocumento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.EmpleadoDto == null)
+            if (_context.TipoDocumentoDto == null)
             {
-                return Problem("Entity set 'CasinoAppClientMvcContext.EmpleadoDto'  is null.");
+                return Problem("Entity set 'CasinoAppClientMvcContext.TipoDocumentoDto'  is null.");
             }
-            var empleadoDto = await _context.EmpleadoDto.FindAsync(id);
-            if (empleadoDto != null)
+            var tipoDocumentoDto = await _context.TipoDocumentoDto.FindAsync(id);
+            if (tipoDocumentoDto != null)
             {
-                _context.EmpleadoDto.Remove(empleadoDto);
+                _context.TipoDocumentoDto.Remove(tipoDocumentoDto);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmpleadoDtoExists(int id)
+        private bool TipoDocumentoDtoExists(int id)
         {
-          return _context.EmpleadoDto.Any(e => e.IdEmpleado == id);
+          return _context.TipoDocumentoDto.Any(e => e.Id == id);
         }
     }
 }

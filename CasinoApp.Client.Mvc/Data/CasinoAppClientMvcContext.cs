@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CasinoApp.Entities.Empleado;
 using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.TipoDocumento;
+using CasinoApp.Entities.TipoEmpleado;
+using CasinoApp.Entities.MovimientoCasino;
+using CasinoApp.Entities.Usuario;
+using CasinoApp.Entities.TipoComida;
+using CasinoApp.Entities.Inventario;
 
 namespace CasinoApp.Client.Mvc.Data
 {
@@ -14,9 +20,20 @@ namespace CasinoApp.Client.Mvc.Data
             : base(options)
         {
         }
-
         public DbSet<CasinoApp.Entities.Empleado.EmpleadoDto> EmpleadoDto { get; set; } = default!;
 
         public DbSet<CasinoApp.Entities.GrupoEmpleado.GrupoEmpleadoDto> GrupoEmpleadoDto { get; set; }
+
+        public DbSet<CasinoApp.Entities.TipoDocumento.TipoDocumentoDto> TipoDocumentoDto { get; set; }
+
+        public DbSet<CasinoApp.Entities.TipoEmpleado.TipoEmpleadoDto> TipoEmpleadoDto { get; set; }
+
+        public DbSet<CasinoApp.Entities.MovimientoCasino.MovimientoCasinoDto> MovimientoCasinoDto { get; set; }
+
+        public DbSet<CasinoApp.Entities.Usuario.UsuarioDto> UsuarioDto { get; set; }
+
+        public DbSet<CasinoApp.Entities.TipoComida.TipoComidaDto> tipoComida { get; set; }
+
+        public DbSet<CasinoApp.Entities.Inventario.InventarioDto> InventarioDto { get; set; }
     }
 }

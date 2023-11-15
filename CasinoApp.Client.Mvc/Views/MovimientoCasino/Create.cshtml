@@ -1,0 +1,68 @@
+﻿@model CasinoApp.Entities.MovimientoCasino.MovimientoCasinoDto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>MovimientoCasinoDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Costo" class="control-label"></label>
+                <input asp-for="Costo" class="form-control" />
+                <span asp-validation-for="Costo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTipoComida" class="control-label"></label>
+                <input asp-for="IdTipoComida" class="form-control" />
+                <span asp-validation-for="IdTipoComida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdGrupoEmpleado" class="control-label"></label>
+                <input asp-for="IdGrupoEmpleado" class="form-control" />
+                <span asp-validation-for="IdGrupoEmpleado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoraRegistro" class="control-label"></label>
+                <input asp-for="HoraRegistro" class="form-control" />
+                <span asp-validation-for="HoraRegistro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEmpleado" class="control-label"></label>
+                <input asp-for="IdEmpleado" class="form-control" />
+                <span asp-validation-for="IdEmpleado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreEmpleado" class="control-label"></label>
+                <input asp-for="NombreEmpleado" class="form-control" />
+                <span asp-validation-for="NombreEmpleado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreGrupoEmpleado" class="control-label"></label>
+                <input asp-for="NombreGrupoEmpleado" class="form-control" />
+                <span asp-validation-for="NombreGrupoEmpleado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreTipoComida" class="control-label"></label>
+                <input asp-for="NombreTipoComida" class="form-control" />
+                <span asp-validation-for="NombreTipoComida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

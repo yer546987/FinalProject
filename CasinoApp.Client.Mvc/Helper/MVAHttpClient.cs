@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text;
 using System.Net.Http;
 using System;
+using CasinoApp.Entities.Empleado;
 
 namespace CasinoApp.Client.Helper
 {
@@ -96,6 +97,7 @@ namespace CasinoApp.Client.Helper
                     throw new Exception($"Ha ocurrido un error en el consumo del servicio. Status code: {response.StatusCode} {response.Headers} Content: {response.Content.ReadAsStringAsync().Result}");
             }
         }
+
 
         #endregion
 
