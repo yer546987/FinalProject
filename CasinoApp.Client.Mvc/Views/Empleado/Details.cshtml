@@ -26,8 +26,9 @@
             @Html.DisplayNameFor(model => model.IdTipoIdentificacionE)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTipoIdentificacionE)
-        </dd>
+            @ViewBag.TiposIdentificacion[Model.IdTipoIdentificacionE]
+        </dd>        
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdentificacionE)
         </dt>
@@ -38,13 +39,14 @@
             @Html.DisplayNameFor(model => model.IdTipoEmpleadoE)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTipoEmpleadoE)
+
+            @ViewBag.TiposEmpleados[Model.IdTipoEmpleadoE]
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdGrupoEE)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdGrupoEE)
+            @ViewBag.GruposEmpleado[Model.IdGrupoEE]
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.InternoE)

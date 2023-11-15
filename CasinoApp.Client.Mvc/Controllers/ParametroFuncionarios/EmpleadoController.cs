@@ -9,6 +9,10 @@ using CasinoApp.Client.Mvc.Data;
 using CasinoApp.Entities.Empleado;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Http;
+using CasinoApp.Entities.TipoEmpleado;
+using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.TipoDocumento;
+using CasinoApp.Client.Mvc.Models.ViewModels;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
 {
@@ -22,106 +26,125 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         }
 
         // GET: EmpleadoDtoes
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
             MVAHttpClient client = new MVAHttpClient();
             var resultado = client.Get<RequestResult<List<EmpleadoDto>>>("/api/Empleado");
+            var tiposEmpleados = client.Get<RequestResult<List<TipoEmpleadoDto>>>("/api/TipoEmpleado").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var tiposIdentificacion = client.Get<RequestResult<List<TipoDocumentoDto>>>("/api/TipoDocumento").Result;
             if (resultado.IsSuccessful)
             {
+                ViewBag.TiposEmpleados = tiposEmpleados.ToDictionary(x => x.Id, x => x.Nombre);
+                ViewBag.GruposEmpleado = gruposEmpleado.ToDictionary(x => x.Id, x => x.NombreGrupo);
+                ViewBag.TiposIdentificacion = tiposIdentificacion.ToDictionary(x => x.Id, x => x.TipoIdentificacion);
+
                 return View(resultado.Result);
             }
+
             return NotFound();
         }
 
         // GET: EmpleadoDtoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: EmpleadoDtoes/Details/5
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.EmpleadoDto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var empleadoDto = await _context.EmpleadoDto
-                .FirstOrDefaultAsync(m => m.IdEmpleado == id);
-            if (empleadoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var empleadoResultado = client.Get<RequestResult<EmpleadoDto>>($"/api/Empleado/{id}");
+            var tiposEmpleados = client.Get<RequestResult<List<TipoEmpleadoDto>>>("/api/TipoEmpleado").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var tiposIdentificacion = client.Get<RequestResult<List<TipoDocumentoDto>>>("/api/TipoDocumento").Result;
+            if (empleadoResultado.IsSuccessful)
             {
-                return NotFound();
+                var empleado = empleadoResultado.Result;
+
+                ViewBag.TiposEmpleados = tiposEmpleados.ToDictionary(x => x.Id, x => x.Nombre);
+                ViewBag.GruposEmpleado = gruposEmpleado.ToDictionary(x => x.Id, x => x.NombreGrupo);
+                ViewBag.TiposIdentificacion = tiposIdentificacion.ToDictionary(x => x.Id, x => x.TipoIdentificacion);
+                return View(empleado);
             }
 
-            return View(empleadoDto);
+            return NotFound();
         }
+
 
         // GET: EmpleadoDtoes/Create
         public IActionResult Create()
         {
-            return View();
+            MVAHttpClient client = new MVAHttpClient();
+
+            var tiposEmpleados = client.Get<RequestResult<List<TipoEmpleadoDto>>>("/api/TipoEmpleado").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var tiposIdentificacion = client.Get<RequestResult<List<TipoDocumentoDto>>>("/api/TipoDocumento").Result;
+
+            var viewModel = new CUEmpledoViewModel
+            {
+                TiposEmpleado = tiposEmpleados,
+                GruposEmpleado = gruposEmpleado,
+                TiposIdentificacion = tiposIdentificacion
+            };
+
+            return View(viewModel);
         }
 
-        // POST: EmpleadoDtoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEmpleado,NombreEmpleado,ApellidoE,IdTipoIdentificacionE,IdentificacionE,IdTipoEmpleadoE,IdGrupoEE,InternoE,NombreGrupoEmpleadoE,NombreTipoEmpleadoE,NombreTipoIdentificacionE")] EmpleadoDto empleadoDto)
+        public IActionResult Create(CUEmpledoViewModel empleadoDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<EmpleadoDto>>("/api/Empleado", empleadoDto.Empleado);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(empleadoDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index",resultado.Result);
             }
-            return View(empleadoDto);
+            return NotFound();
         }
 
         // GET: EmpleadoDtoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.EmpleadoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<EmpleadoDto>>($"/api/Empleado/{id}");
+            var tiposEmpleados = client.Get<RequestResult<List<TipoEmpleadoDto>>>("/api/TipoEmpleado").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var tiposIdentificacion = client.Get<RequestResult<List<TipoDocumentoDto>>>("/api/TipoDocumento").Result;
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                var viewModel = new CUEmpledoViewModel
+                {
+                    Empleado = resultado.Result,
+                    TiposEmpleado = tiposEmpleados,
+                    GruposEmpleado = gruposEmpleado,
+                    TiposIdentificacion = tiposIdentificacion
+                };
+
+                return View(viewModel);
             }
 
-            var empleadoDto = await _context.EmpleadoDto.FindAsync(id);
-            if (empleadoDto == null)
-            {
-                return NotFound();
-            }
-            return View(empleadoDto);
+            return NotFound();
         }
 
-        // POST: EmpleadoDtoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEmpleado,NombreEmpleado,ApellidoE,IdTipoIdentificacionE,IdentificacionE,IdTipoEmpleadoE,IdGrupoEE,InternoE,NombreGrupoEmpleadoE,NombreTipoEmpleadoE,NombreTipoIdentificacionE")] EmpleadoDto empleadoDto)
+        public IActionResult Edit(CUEmpledoViewModel empleadoDto)
         {
-            if (id != empleadoDto.IdEmpleado)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<EmpleadoDto>>("/api/Empleado/Update", empleadoDto.Empleado);
+
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index"); 
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(empleadoDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmpleadoDtoExists(empleadoDto.IdEmpleado))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(empleadoDto);
+            return NotFound(); 
         }
 
         // GET: EmpleadoDtoes/Delete/5

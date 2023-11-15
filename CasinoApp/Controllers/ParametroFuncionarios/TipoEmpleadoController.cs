@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers.ParametrosFuncionarios
+namespace CasinoApp.Api.Controllers.ParametroFuncionarios
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoEmpleadoController : ControllerBase
+    public class TipoEmpleadoController : Controller
     {
         private TipoEmpleadoServices services;
 

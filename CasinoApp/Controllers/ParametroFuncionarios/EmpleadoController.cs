@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace CasinoApp.Api.Controllers
+namespace CasinoApp.Api.Controllers.ParametroFuncionarios
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class EmpleadoController : Controller
     {
         private EmpleadoServices services;
@@ -34,10 +35,10 @@ namespace CasinoApp.Api.Controllers
         /// <param name="id">Identificador de la especie</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{Nombre}")]
-        public RequestResult<EmpleadoDto> GetById([FromRoute] string Nombre)
+        [Route("{Id}")]
+        public RequestResult<EmpleadoDto> GetById([FromRoute] int Id)
         {
-            return services.GetById(Nombre);
+            return services.GetById(Id);
         }
 
         [HttpPost]
@@ -51,12 +52,13 @@ namespace CasinoApp.Api.Controllers
         }
 
 
-        [HttpPut]
-        public EmpleadoDto Update([FromBody] EmpleadoDto especie)
+        [HttpPost]
+        [Route("Update")]
+        public RequestResult<EmpleadoDto> Update([FromBody] EmpleadoDto empleado)
         {
             if (ModelState.IsValid)
             {
-                return services.Update(especie);
+                return services.Update(empleado);
             }
             return null;
         }

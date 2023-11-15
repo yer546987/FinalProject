@@ -69,23 +69,23 @@ public partial class CasinoAppContext : DbContext
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsFixedLength();
-            entity.Property(e => e.Identificacion).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Identificacion).HasColumnType("int");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsFixedLength();
 
-            entity.HasOne(d => d.IdGrupoENavigation).WithMany(p => p.Empleados)
+            entity.HasOne(d => d.GrupoE).WithMany(p => p.Empleados)
                 .HasForeignKey(d => d.IdGrupoE)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Empleado_GrupoEmpleado");
 
-            entity.HasOne(d => d.IdTipoEmpleadoNavigation).WithMany(p => p.Empleados)
+            entity.HasOne(d => d.TipoEmpleado).WithMany(p => p.Empleados)
                 .HasForeignKey(d => d.IdTipoEmpleado)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Empleado_TipoEmpleado");
 
-            entity.HasOne(d => d.IdTipoIdentificacionNavigation).WithMany(p => p.Empleados)
+            entity.HasOne(d => d.TipoDocumento).WithMany(p => p.Empleados)
                 .HasForeignKey(d => d.IdTipoIdentificacion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Empleado_TipoDocumentos");

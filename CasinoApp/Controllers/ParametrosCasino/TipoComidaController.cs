@@ -9,7 +9,7 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TipoComidaController : ControllerBase
+    public class TipoComidaController : Controller
     {
         private TipoComidaServices services;
 

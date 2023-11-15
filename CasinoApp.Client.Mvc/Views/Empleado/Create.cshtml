@@ -1,4 +1,4 @@
-﻿@model CasinoApp.Entities.Empleado.EmpleadoDto
+﻿@model CasinoApp.Client.Mvc.Models.ViewModels.CUEmpledoViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -14,38 +14,55 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NombreEmpleado" class="control-label"></label>
-                <input asp-for="NombreEmpleado" class="form-control" />
-                <span asp-validation-for="NombreEmpleado" class="text-danger"></span>
+                <label asp-for="Empleado.NombreEmpleado" class="control-label"></label>
+                <input asp-for="Empleado.NombreEmpleado" class="form-control" />
+                <span asp-validation-for="Empleado.NombreEmpleado" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ApellidoE" class="control-label"></label>
-                <input asp-for="ApellidoE" class="form-control" />
-                <span asp-validation-for="ApellidoE" class="text-danger"></span>
+                <label asp-for="Empleado.ApellidoE" class="control-label"></label>
+                <input asp-for="Empleado.ApellidoE" class="form-control" />
+                <span asp-validation-for="Empleado.ApellidoE" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdTipoIdentificacionE" class="control-label"></label>
-                <input asp-for="IdTipoIdentificacionE" class="form-control" />
-                <span asp-validation-for="IdTipoIdentificacionE" class="text-danger"></span>
+                <label for="IdTipoEmpleadoE">Grupo de empleado</label>
+                <select asp-for="Empleado.IdGrupoEE" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var Grupo in Model.GruposEmpleado)
+                    {
+                        <option value="@Grupo.Id">@Grupo.NombreGrupo</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="IdentificacionE" class="control-label"></label>
-                <input asp-for="IdentificacionE" class="form-control" />
-                <span asp-validation-for="IdentificacionE" class="text-danger"></span>
+                <label asp-for="Empleado.IdentificacionE" class="control-label"></label>
+                <input asp-for="Empleado.IdentificacionE" class="form-control" />
+                <span asp-validation-for="Empleado.IdentificacionE" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdTipoEmpleadoE" class="control-label"></label>
-                <input asp-for="IdTipoEmpleadoE" class="form-control" />
-                <span asp-validation-for="IdTipoEmpleadoE" class="text-danger"></span>
+                <label for="IdTipoEmpleadoE">Tipo de Empleado</label>
+                <select asp-for="Empleado.IdTipoEmpleadoE" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var tipoEmpleado in Model.TiposEmpleado)
+                    {
+                        <option value="@tipoEmpleado.Id">@tipoEmpleado.Nombre</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="IdGrupoEE" class="control-label"></label>
-                <input asp-for="IdGrupoEE" class="form-control" />
-                <span asp-validation-for="IdGrupoEE" class="text-danger"></span>
+                <label for="IdTipoEmpleadoE">Tipo de Identificacion</label>
+                <select asp-for="Empleado.IdTipoIdentificacionE" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var tipoIdentificacion in Model.TiposIdentificacion)
+                    {
+                        <option value="@tipoIdentificacion.Id">@tipoIdentificacion.TipoIdentificacion</option>
+                    }
+                </select>
             </div>
+
             <div class="form-group form-check">
+                <label for="IdTipoEmpleadoE">Interno</label>
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="InternoE" /> @Html.DisplayNameFor(model => model.InternoE)
+                    <input class="form-check-input" asp-for="Empleado.InternoE" /> 
                 </label>
             </div>
             

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.TipoDocumento;
+using CasinoApp.Entities.TipoEmpleado;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CasinoApp.Entities.Empleado
 {
@@ -14,10 +12,10 @@ namespace CasinoApp.Entities.Empleado
         public string NombreEmpleado { get; set; }
         public string ApellidoE { get; set; }
         public int IdTipoIdentificacionE { get; set; }
-        public decimal IdentificacionE { get; set; }
+        public int IdentificacionE { get; set; }
         public int IdTipoEmpleadoE { get; set; }
         public int IdGrupoEE { get; set; }
         public bool InternoE { get; set; }
-
+        
     }
 }
