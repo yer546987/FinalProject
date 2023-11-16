@@ -27,8 +27,6 @@ namespace CasinoApp.Aplication.Services
             {
                 if (tipoEmpleado is null)
                     return RequestResult<TipoEmpleadoDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(tipoEmpleado.Nombre))
-                    return RequestResult<TipoEmpleadoDto>.CreateNoSuccess("El nombre del tipo de empleado es requerido");
                 TipoEmpleado entity = new TipoEmpleado();
                 entity.Nombre = tipoEmpleado.Nombre;
                 var result = _Context.TipoEmpleados.Add(entity);
@@ -96,24 +94,42 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public TipoEmpleadoDto Update(TipoEmpleadoDto tipoEmpleado)
+        public RequestResult<TipoEmpleadoDto> Update(TipoEmpleadoDto tipoEmpleado)
         {
-            if (tipoEmpleado is null) return null;
-            if (tipoEmpleado.Id is 0) return null;
-            if (string.IsNullOrEmpty(tipoEmpleado.Nombre)) return null;
-            var entidad = _Context.TipoEmpleados
-                                .Where(x => x.Id.Equals(tipoEmpleado.Id))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.Nombre = tipoEmpleado.Nombre;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new TipoEmpleadoDto()
+            try
             {
-                Id = entidad.Id,
-                Nombre = entidad.Nombre,
-            };
+                if (tipoEmpleado == null || tipoEmpleado.Id == 0 || string.IsNullOrEmpty(tipoEmpleado.Nombre))
+                {
+                    return RequestResult<TipoEmpleadoDto>.CreateNoSuccess("Datos de TipoEmpleado no válidos");
+                }
+
+                var entidad = _Context.TipoEmpleados
+                                        .FirstOrDefault(x => x.Id.Equals(tipoEmpleado.Id));
+
+                if (entidad == null)
+                {
+                    return RequestResult<TipoEmpleadoDto>.CreateNoSuccess("TipoEmpleado no encontrado");
+                }
+
+                entidad.Nombre = tipoEmpleado.Nombre;
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                var resultado = new TipoEmpleadoDto()
+                {
+                    Id = entidad.Id,
+                    Nombre = entidad.Nombre,
+                };
+
+                return RequestResult<TipoEmpleadoDto>.CreateSuccess(resultado);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar TipoEmpleado: {ex.Message}");
+                return RequestResult<TipoEmpleadoDto>.CreateError($"Error al actualizar TipoEmpleado: {ex.Message}");
+            }
         }
+
     }
 }

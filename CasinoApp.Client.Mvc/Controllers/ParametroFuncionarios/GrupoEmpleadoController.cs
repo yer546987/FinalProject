@@ -23,10 +23,11 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         }
 
         // GET: GrupoEmpleado
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             MVAHttpClient client = new MVAHttpClient();
-            var resultado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleadoControllers");
+            var resultado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado");
+
             if (resultado.IsSuccessful)
             {
                 return View(resultado.Result);
@@ -35,21 +36,21 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         }
 
         // GET: GrupoEmpleado/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.GrupoEmpleadoDto == null)
+            if (id is null)
             {
                 return NotFound();
             }
 
-            var grupoEmpleadoDto = await _context.GrupoEmpleadoDto
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (grupoEmpleadoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var grupoEmpleadoResultado = client.Get<RequestResult<GrupoEmpleadoDto>>($"/api/GrupoEmpleado/{id}");
+            if (grupoEmpleadoResultado.IsSuccessful)
             {
-                return NotFound();
+                return View(grupoEmpleadoResultado.Result);
             }
 
-            return View(grupoEmpleadoDto);
+            return NotFound();
         }
 
         // GET: GrupoEmpleado/Create
@@ -63,67 +64,50 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreGrupo")] GrupoEmpleadoDto grupoEmpleadoDto)
+        public IActionResult Create(GrupoEmpleadoDto grupoEmpleadoDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<GrupoEmpleadoDto>>("/api/GrupoEmpleado", grupoEmpleadoDto);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(grupoEmpleadoDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(grupoEmpleadoDto);
+            return NotFound();
         }
 
+
         // GET: GrupoEmpleado/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.GrupoEmpleadoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<GrupoEmpleadoDto>>($"/api/GrupoEmpleado/{id}");
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return View(resultado.Result);
             }
 
-            var grupoEmpleadoDto = await _context.GrupoEmpleadoDto.FindAsync(id);
-            if (grupoEmpleadoDto == null)
-            {
-                return NotFound();
-            }
-            return View(grupoEmpleadoDto);
+            return NotFound();
         }
 
         // POST: GrupoEmpleado/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreGrupo")] GrupoEmpleadoDto grupoEmpleadoDto)
+        public IActionResult Edit(GrupoEmpleadoDto grupoEmpleadoDto)
         {
-            if (id != grupoEmpleadoDto.Id)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<GrupoEmpleadoDto>>("/api/GrupoEmpleado/Update", grupoEmpleadoDto);
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(grupoEmpleadoDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GrupoEmpleadoDtoExists(grupoEmpleadoDto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(grupoEmpleadoDto);
+            return NotFound();
         }
+
+
 
         // GET: GrupoEmpleado/Delete/5
         public async Task<IActionResult> Delete(int? id)

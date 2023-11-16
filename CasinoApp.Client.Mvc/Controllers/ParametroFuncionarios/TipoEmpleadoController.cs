@@ -35,21 +35,21 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         }
 
         // GET: TipoEmpleado/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public  IActionResult  Details(int? id)
         {
-            if (id == null || _context.TipoEmpleadoDto == null)
+            if (id is null)
             {
                 return NotFound();
             }
 
-            var tipoEmpleadoDto = await _context.TipoEmpleadoDto
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tipoEmpleadoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var tipoEmpleadoResult = client.Get<RequestResult<TipoEmpleadoDto>>($"/api/TipoEmpleado/{id}");
+            if (tipoEmpleadoResult.IsSuccessful)
             {
-                return NotFound();
+                return View(tipoEmpleadoResult.Result);
             }
 
-            return View(tipoEmpleadoDto);
+            return View(tipoEmpleadoResult);
         }
 
         // GET: TipoEmpleado/Create
@@ -63,31 +63,29 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre")] TipoEmpleadoDto tipoEmpleadoDto)
+        public  IActionResult  Create(TipoEmpleadoDto tipoEmpleadoDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<TipoEmpleadoDto>>("/api/TipoEmpleado", tipoEmpleadoDto);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(tipoEmpleadoDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(tipoEmpleadoDto);
+            return NotFound();
         }
 
         // GET: TipoEmpleado/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public  IActionResult  Edit(int? id)
         {
-            if (id == null || _context.TipoEmpleadoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<TipoEmpleadoDto>>($"/api/TipoEmpleado/{id}");
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return View(resultado.Result);
             }
 
-            var tipoEmpleadoDto = await _context.TipoEmpleadoDto.FindAsync(id);
-            if (tipoEmpleadoDto == null)
-            {
-                return NotFound();
-            }
-            return View(tipoEmpleadoDto);
+            return NotFound();
         }
 
         // POST: TipoEmpleado/Edit/5
@@ -95,34 +93,17 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroFuncionarios
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] TipoEmpleadoDto tipoEmpleadoDto)
+        public  IActionResult  Edit(TipoEmpleadoDto tipoEmpleadoDto)
         {
-            if (id != tipoEmpleadoDto.Id)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<TipoEmpleadoDto>>("/api/TipoEmpleado/Update", tipoEmpleadoDto);
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(tipoEmpleadoDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TipoEmpleadoDtoExists(tipoEmpleadoDto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(tipoEmpleadoDto);
+            return NotFound();
         }
 
         // GET: TipoEmpleado/Delete/5

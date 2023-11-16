@@ -27,8 +27,6 @@ namespace CasinoApp.Aplication.Services
             {
                 if (grupoEmpleado is null)
                     return RequestResult<GrupoEmpleadoDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(grupoEmpleado.NombreGrupo))
-                    return RequestResult<GrupoEmpleadoDto>.CreateNoSuccess("El nombre del Grupo del empleado es requerido");
                 GrupoEmpleado entity = new GrupoEmpleado();
                 entity.NombreGrupo = grupoEmpleado.NombreGrupo;
                 var result = _Context.GrupoEmpleados.Add(entity);
@@ -98,24 +96,42 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public GrupoEmpleadoDto Update(GrupoEmpleadoDto grupoEmpleado)
+        public RequestResult<GrupoEmpleadoDto> Update(GrupoEmpleadoDto grupoEmpleado)
         {
-            if (grupoEmpleado is null) return null;
-            if (grupoEmpleado.Id is 0) return null;
-            if (string.IsNullOrEmpty(grupoEmpleado.NombreGrupo)) return null;
-            var entidad = _Context.GrupoEmpleados
-                                .Where(x => x.Id.Equals(grupoEmpleado.Id))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.NombreGrupo = grupoEmpleado.NombreGrupo;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new GrupoEmpleadoDto()
+            try
             {
-                Id = entidad.Id,
-                NombreGrupo = entidad.NombreGrupo
-            };
+                if (grupoEmpleado == null || grupoEmpleado.Id == 0 || string.IsNullOrEmpty(grupoEmpleado.NombreGrupo))
+                {
+                    return RequestResult<GrupoEmpleadoDto>.CreateNoSuccess("Datos de GrupoEmpleado no válidos");
+                }
+
+                var entidad = _Context.GrupoEmpleados
+                                        .FirstOrDefault(x => x.Id.Equals(grupoEmpleado.Id));
+
+                if (entidad == null)
+                {
+                    return RequestResult<GrupoEmpleadoDto>.CreateNoSuccess("GrupoEmpleado no encontrado");
+                }
+
+                entidad.NombreGrupo = grupoEmpleado.NombreGrupo;
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                var resultado = new GrupoEmpleadoDto()
+                {
+                    Id = entidad.Id,
+                    NombreGrupo = entidad.NombreGrupo
+                };
+
+                return RequestResult<GrupoEmpleadoDto>.CreateSuccess(resultado);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar GrupoEmpleado: {ex.Message}");
+                return RequestResult<GrupoEmpleadoDto>.CreateError($"Error al actualizar GrupoEmpleado: {ex.Message}");
+            }
         }
+
     }
 }

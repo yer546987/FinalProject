@@ -27,8 +27,6 @@ namespace CasinoApp.Aplication.Services
             {
                 if (tipoDocumento is null)
                     return RequestResult<TipoDocumentoDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(tipoDocumento.TipoIdentificacion))
-                    return RequestResult<TipoDocumentoDto>.CreateNoSuccess("El tipo de documento es requerido");
                 TipoDocumento entity = new TipoDocumento();
                 entity.TipoIdentificacion = tipoDocumento.TipoIdentificacion;
                 var result = _Context.TipoDocumentos.Add(entity);
@@ -96,24 +94,44 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public TipoDocumentoDto Update(TipoDocumentoDto tipoDocumento)
+        public RequestResult<TipoDocumentoDto> Update(TipoDocumentoDto tipoDocumento)
         {
-            if (tipoDocumento is null) return null;
-            if (tipoDocumento.Id is 0) return null;
-            if (string.IsNullOrEmpty(tipoDocumento.TipoIdentificacion)) return null;
-            var entidad = _Context.TipoDocumentos
-                                .Where(x => x.Id.Equals(tipoDocumento.Id))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.TipoIdentificacion = tipoDocumento.TipoIdentificacion;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new TipoDocumentoDto()
+            try
             {
-                Id = entidad.Id,
-                TipoIdentificacion = entidad.TipoIdentificacion
-            };
+                if (tipoDocumento == null || tipoDocumento.Id == 0 || string.IsNullOrEmpty(tipoDocumento.TipoIdentificacion))
+                {
+                    return RequestResult<TipoDocumentoDto>.CreateNoSuccess("Datos de TipoDocumento no válidos");
+                }
+
+                var entidad = _Context.TipoDocumentos
+                                        .FirstOrDefault(x => x.Id.Equals(tipoDocumento.Id));
+
+                if (entidad == null)
+                {
+                    return RequestResult<TipoDocumentoDto>.CreateNoSuccess("TipoDocumento no encontrado");
+                }
+
+                entidad.TipoIdentificacion = tipoDocumento.TipoIdentificacion;
+
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+
+                _Context.SaveChanges();
+
+                var resultado = new TipoDocumentoDto()
+                {
+                    Id = entidad.Id,
+                    TipoIdentificacion = entidad.TipoIdentificacion
+                };
+
+                return RequestResult<TipoDocumentoDto>.CreateSuccess(resultado);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar TipoDocumento: {ex.Message}");
+                return RequestResult<TipoDocumentoDto>.CreateError($"Error al actualizar TipoDocumento: {ex.Message}");
+            }
         }
+
     }
 }

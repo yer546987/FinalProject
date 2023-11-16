@@ -27,8 +27,6 @@ namespace CasinoApp.Aplication.Services
             {
                 if (unidadMedida is null)
                     return RequestResult<UnidadMedidaDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(unidadMedida.Nombre))
-                    return RequestResult<UnidadMedidaDto>.CreateNoSuccess("El nombre de la unidad de medida es requerido");
                 UnidadMedidum entity = new UnidadMedidum();
                 entity.Nombre = unidadMedida.Nombre;
                 var result = _Context.UnidadMedida.Add(entity);
@@ -97,25 +95,42 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public UnidadMedidaDto Update(UnidadMedidaDto unidadMedida)
+        public RequestResult<UnidadMedidaDto> Update(UnidadMedidaDto unidadMedida)
         {
-
-            if (unidadMedida is null) return null;
-            if (unidadMedida.Id is 0) return null;
-            if (string.IsNullOrEmpty(unidadMedida.Nombre)) return null;
-            var entidad = _Context.UnidadMedida
-                                .Where(x => x.Id.Equals(unidadMedida.Id))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.Nombre = unidadMedida.Nombre;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new UnidadMedidaDto()
+            try
             {
-                Id = entidad.Id,
-                Nombre = entidad.Nombre,
-            };
+                if (unidadMedida == null || unidadMedida.Id == 0 || string.IsNullOrEmpty(unidadMedida.Nombre))
+                {
+                    return RequestResult<UnidadMedidaDto>.CreateNoSuccess("Datos de UnidadMedida no válidos");
+                }
+
+                var entidad = _Context.UnidadMedida
+                                        .FirstOrDefault(x => x.Id.Equals(unidadMedida.Id));
+
+                if (entidad == null)
+                {
+                    return RequestResult<UnidadMedidaDto>.CreateNoSuccess("UnidadMedida no encontrada");
+                }
+
+                entidad.Nombre = unidadMedida.Nombre;
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                var resultado = new UnidadMedidaDto()
+                {
+                    Id = entidad.Id,
+                    Nombre = entidad.Nombre,
+                };
+
+                return RequestResult<UnidadMedidaDto>.CreateSuccess(resultado);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar UnidadMedida: {ex.Message}");
+                return RequestResult<UnidadMedidaDto>.CreateError($"Error al actualizar UnidadMedida: {ex.Message}");
+            }
         }
+
     }
 }

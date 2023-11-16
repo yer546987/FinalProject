@@ -10,6 +10,7 @@ using CasinoApp.Entities.UnidadMedida;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.Ingredientes;
+using CasinoApp.Entities.TipoDocumento;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
 {
@@ -23,7 +24,7 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
         }
 
         // GET: UnidadMedidaDtoes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             MVAHttpClient client = new MVAHttpClient();
             var resultado = client.Get<RequestResult<List<UnidadMedidaDto>>>("/api/UnidadMedida");
@@ -35,21 +36,21 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
         }
 
         // GET: UnidadMedidaDtoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.UnidadMedidaDto == null)
+            if (id is null)
             {
                 return NotFound();
             }
 
-            var unidadMedidaDto = await _context.UnidadMedidaDto
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (unidadMedidaDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var unidadMedidaResult = client.Get<RequestResult<UnidadMedidaDto>>($"/api/UnidadMedida/{id}");
+            if (unidadMedidaResult.IsSuccessful)
             {
-                return NotFound();
+                return View(unidadMedidaResult.Result);
             }
 
-            return View(unidadMedidaDto);
+            return View(unidadMedidaResult);
         }
 
         // GET: UnidadMedidaDtoes/Create
@@ -63,31 +64,29 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre")] UnidadMedidaDto unidadMedidaDto)
+        public async Task<IActionResult> Create(UnidadMedidaDto unidadMedidaDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<UnidadMedidaDto>>("/api/UnidadMedida", unidadMedidaDto);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(unidadMedidaDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(unidadMedidaDto);
+            return NotFound();
         }
 
         // GET: UnidadMedidaDtoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult  Edit(int? id)
         {
-            if (id == null || _context.UnidadMedidaDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<UnidadMedidaDto>>($"/api/UnidadMedida/{id}");
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return View(resultado.Result);
             }
 
-            var unidadMedidaDto = await _context.UnidadMedidaDto.FindAsync(id);
-            if (unidadMedidaDto == null)
-            {
-                return NotFound();
-            }
-            return View(unidadMedidaDto);
+            return NotFound();
         }
 
         // POST: UnidadMedidaDtoes/Edit/5
@@ -95,34 +94,17 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] UnidadMedidaDto unidadMedidaDto)
+        public IActionResult Edit(UnidadMedidaDto unidadMedidaDto)
         {
-            if (id != unidadMedidaDto.Id)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<UnidadMedidaDto>>("/api/UnidadMedida/Update", unidadMedidaDto);
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(unidadMedidaDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UnidadMedidaDtoExists(unidadMedidaDto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(unidadMedidaDto);
+            return NotFound();
         }
 
         // GET: UnidadMedidaDtoes/Delete/5

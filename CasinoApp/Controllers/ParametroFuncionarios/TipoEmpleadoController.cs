@@ -53,8 +53,9 @@ namespace CasinoApp.Api.Controllers.ParametroFuncionarios
         }
 
 
-        [HttpPut]
-        public TipoEmpleadoDto Update([FromBody] TipoEmpleadoDto tipoEmpleado)
+        [HttpPost]
+        [Route("Update")]
+        public RequestResult<TipoEmpleadoDto> Update([FromBody] TipoEmpleadoDto tipoEmpleado)
         {
             if (ModelState.IsValid)
             {

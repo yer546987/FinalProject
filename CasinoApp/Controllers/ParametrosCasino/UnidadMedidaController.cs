@@ -53,8 +53,9 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         }
 
 
-        [HttpPut]
-        public UnidadMedidaDto Update([FromBody] UnidadMedidaDto unidadMedida)
+        [HttpPost]
+        [Route("Update")]
+        public RequestResult<UnidadMedidaDto> Update([FromBody] UnidadMedidaDto unidadMedida)
         {
             if (ModelState.IsValid)
             {

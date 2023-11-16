@@ -10,7 +10,7 @@ namespace CasinoApp.Aplication.Contracts
 {
     public interface IUnidadMedidaServices
     {
-        public UnidadMedidaDto Update(UnidadMedidaDto unidadMedida);
+        public RequestResult<UnidadMedidaDto> Update(UnidadMedidaDto unidadMedida);
         public bool Delete(int idUnidadMedida);
 
         public RequestResult<List<UnidadMedidaDto>> GetAll();
