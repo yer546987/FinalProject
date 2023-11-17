@@ -53,8 +53,9 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         }
 
 
-        [HttpPut]
-        public CostoCasinoDto Update([FromBody] CostoCasinoDto costoCasino)
+        [HttpPost]
+        [Route("Update")]
+        public RequestResult<CostoCasinoDto> Update([FromBody] CostoCasinoDto costoCasino)
         {
             if (ModelState.IsValid)
             {

@@ -1,5 +1,7 @@
 ﻿using CasinoApp.Entities.Empleado;
 using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.Ingredientes;
+using CasinoApp.Entities.TipoComida;
 using CasinoApp.Entities.TipoDocumento;
 using CasinoApp.Entities.TipoEmpleado;
 using System.Collections.Generic;

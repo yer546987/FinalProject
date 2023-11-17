@@ -27,7 +27,7 @@ namespace CasinoApp.Aplication.Services
             {
                 if (unidadMedida is null)
                     return RequestResult<UnidadMedidaDto>.CreateNoSuccess("Los datos son requeridos");
-                UnidadMedidum entity = new UnidadMedidum();
+                UnidadMedida entity = new UnidadMedida();
                 entity.Nombre = unidadMedida.Nombre;
                 var result = _Context.UnidadMedida.Add(entity);
                 int rows = _Context.SaveChanges();

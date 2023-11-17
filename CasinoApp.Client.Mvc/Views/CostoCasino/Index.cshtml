@@ -21,12 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdGrupoEmpleado)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreGrupoEmpleado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreTipoComida)
-            </th>
+ 
             <th></th>
         </tr>
     </thead>
@@ -36,18 +31,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PrecioC)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTipoComida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdGrupoEmpleado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreGrupoEmpleado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreTipoComida)
-            </td>
+                <td>
+                    @ViewBag.TipoComida[item.IdTipoComida]
+                </td>
+                <td>
+                    @ViewBag.GruposEmpleado[item.IdGrupoEmpleado]
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCostoCasino">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdCostoCasino">Details</a> |

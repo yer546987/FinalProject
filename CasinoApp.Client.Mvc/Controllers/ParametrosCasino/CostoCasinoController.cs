@@ -10,6 +10,12 @@ using CasinoApp.Entities.CostoCasino;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.Ingredientes;
+using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.TipoEmpleado;
+using CasinoApp.Entities.Empleado;
+using CasinoApp.Entities.TipoDocumento;
+using CasinoApp.Client.Mvc.Models.ViewModels;
+using CasinoApp.Entities.TipoComida;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
 {
@@ -23,106 +29,118 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
         }
 
         // GET: CostoCasinoDtoes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             MVAHttpClient client = new MVAHttpClient();
             var resultado = client.Get<RequestResult<List<CostoCasinoDto>>>("/api/CostoCasino");
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
             if (resultado.IsSuccessful)
             {
+                ViewBag.TipoComida = tipoComida.ToDictionary(x => x.Id, x => x.Nombre);
+                ViewBag.GruposEmpleado = gruposEmpleado.ToDictionary(x => x.Id, x => x.NombreGrupo);
+
                 return View(resultado.Result);
             }
             return NotFound();
         }
 
         // GET: CostoCasinoDtoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public  IActionResult  Details(int? id)
         {
-            if (id == null || _context.CostoCasinoDto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var costoCasinoDto = await _context.CostoCasinoDto
-                .FirstOrDefaultAsync(m => m.IdCostoCasino == id);
-            if (costoCasinoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var empleadoResultado = client.Get<RequestResult<CostoCasinoDto>>($"/api/CostoCasino/{id}");
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            if (empleadoResultado.IsSuccessful)
             {
-                return NotFound();
+                var costoCasino = empleadoResultado.Result;
+
+                ViewBag.TipoComida = tipoComida.ToDictionary(x => x.Id, x => x.Nombre);
+                ViewBag.GruposEmpleado = gruposEmpleado.ToDictionary(x => x.Id, x => x.NombreGrupo);
+
+                return View(costoCasino);
             }
 
-            return View(costoCasinoDto);
+            return NotFound();
         }
 
         // GET: CostoCasinoDtoes/Create
         public IActionResult Create()
         {
-            return View();
+            MVAHttpClient client = new MVAHttpClient();
+
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+
+            var viewModel = new CUCostoCasinoViewModels
+            {
+                TipoComida = tipoComida,
+                GruposEmpleado = gruposEmpleado,
+            };
+
+            return View(viewModel);
         }
 
         // POST: CostoCasinoDtoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCostoCasino,PrecioC,IdTipoComida,IdGrupoEmpleado,NombreGrupoEmpleado,NombreTipoComida")] CostoCasinoDto costoCasinoDto)
+        public  IActionResult Create(CUCostoCasinoViewModels costoCasinoDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<CostoCasinoDto>>("/api/CostoCasino", costoCasinoDto.CostoCasino);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(costoCasinoDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(costoCasinoDto);
+            return NotFound();
         }
 
         // GET: CostoCasinoDtoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.CostoCasinoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<CostoCasinoDto>>($"/api/CostoCasino/{id}");
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var grupoEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                var viewModel = new CUCostoCasinoViewModels
+                {
+                    CostoCasino = resultado.Result,
+                    TipoComida = tipoComida,
+                    GruposEmpleado = grupoEmpleado
+                };
+
+                return View(viewModel);
             }
 
-            var costoCasinoDto = await _context.CostoCasinoDto.FindAsync(id);
-            if (costoCasinoDto == null)
-            {
-                return NotFound();
-            }
-            return View(costoCasinoDto);
+            return NotFound();
         }
 
         // POST: CostoCasinoDtoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCostoCasino,PrecioC,IdTipoComida,IdGrupoEmpleado,NombreGrupoEmpleado,NombreTipoComida")] CostoCasinoDto costoCasinoDto)
+        public IActionResult Edit(CUCostoCasinoViewModels costoCasinoDto)
         {
-            if (id != costoCasinoDto.IdCostoCasino)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<CostoCasinoDto>>("/api/CostoCasino/Update", costoCasinoDto.CostoCasino);
+
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(costoCasinoDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CostoCasinoDtoExists(costoCasinoDto.IdCostoCasino))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(costoCasinoDto);
+            return NotFound();
         }
 
         // GET: CostoCasinoDtoes/Delete/5

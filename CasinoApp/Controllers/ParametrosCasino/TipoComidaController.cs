@@ -52,8 +52,9 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
         }
 
 
-        [HttpPut]
-        public TipoComidaDto Update([FromBody] TipoComidaDto tipoComida)
+        [HttpPost]
+        [Route("Update")]
+        public RequestResult<TipoComidaDto> Update([FromBody] TipoComidaDto tipoComida)
         {
             if (ModelState.IsValid)
             {

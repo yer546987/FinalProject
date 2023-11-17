@@ -1,4 +1,4 @@
-﻿@model CasinoApp.Entities.TipoComida.TipoComidaDto
+﻿@model CasinoApp.Client.Mvc.Models.ViewModels.CUTipoComidaViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,38 +13,48 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                <label asp-for="tipoComida.Nombre" class="control-label"></label>
+                <input asp-for="tipoComida.Nombre" class="form-control" />
+                <span asp-validation-for="tipoComida.Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
+                <label asp-for="tipoComida.Precio" class="control-label"></label>
+                <input asp-for="tipoComida.Precio" class="form-control" />
+                <span asp-validation-for="tipoComida.Precio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                <label asp-for="tipoComida.Descripcion" class="control-label"></label>
+                <input asp-for="tipoComida.Descripcion" class="form-control" />
+                <span asp-validation-for="tipoComida.Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TiempoInicial" class="control-label"></label>
-                <input asp-for="TiempoInicial" class="form-control" />
-                <span asp-validation-for="TiempoInicial" class="text-danger"></span>
+                <label asp-for="tipoComida.TiempoInicial" class="control-label"></label>
+                <input asp-for="tipoComida.TiempoInicial" class="form-control" />
+                <span asp-validation-for="tipoComida.TiempoInicial" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TiempoFinal" class="control-label"></label>
-                <input asp-for="TiempoFinal" class="form-control" />
-                <span asp-validation-for="TiempoFinal" class="text-danger"></span>
+                <label asp-for="tipoComida.TiempoFinal" class="control-label"></label>
+                <input asp-for="tipoComida.TiempoFinal" class="form-control" />
+                <span asp-validation-for="tipoComida.TiempoFinal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Limite" class="control-label"></label>
-                <input asp-for="Limite" class="form-control" />
-                <span asp-validation-for="Limite" class="text-danger"></span>
+                <label asp-for="tipoComida.Limite" class="control-label"></label>
+                <input asp-for="tipoComida.Limite" class="form-control" />
+                <span asp-validation-for="tipoComida.Limite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="IdIngredientess">Tipo Comida</label>
+                <select asp-for="tipoComida.IdIngredientess" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var íngredientes in Model.ingredientes)
+                    {
+                        <option value="@íngredientes.Id">@íngredientes.Cantidad</option>
+                    }
+                </select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Cronograma" /> @Html.DisplayNameFor(model => model.Cronograma)
+                    <input class="form-check-input" asp-for="tipoComida.Cronograma" /> @Html.DisplayNameFor(model => model.tipoComida.Cronograma)
                 </label>
             </div>
             <div class="form-group">

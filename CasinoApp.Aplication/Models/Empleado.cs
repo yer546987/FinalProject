@@ -11,11 +11,14 @@ public partial class Empleado
     public string Nombre { get; set; }
 
     public string Apellido { get; set; }
+
     [ForeignKey("TipoDocumento")]
     public int IdTipoIdentificacion { get; set; }
     public int Identificacion { get; set; }
+
     [ForeignKey("TipoEmpleado")]
     public int IdTipoEmpleado { get; set; }
+
     [ForeignKey("GrupoEmpleado")]
     public int IdGrupoE { get; set; }
 

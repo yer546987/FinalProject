@@ -1,4 +1,4 @@
-﻿@model CasinoApp.Entities.CostoCasino.CostoCasinoDto
+﻿@model CasinoApp.Client.Mvc.Models.ViewModels.CUCostoCasinoViewModels
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,31 +12,31 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdCostoCasino" />
+            <input type="hidden" asp-for="CostoCasino.IdCostoCasino" />
             <div class="form-group">
-                <label asp-for="PrecioC" class="control-label"></label>
-                <input asp-for="PrecioC" class="form-control" />
-                <span asp-validation-for="PrecioC" class="text-danger"></span>
+                <label asp-for="CostoCasino.PrecioC" class="control-label"></label>
+                <input asp-for="CostoCasino.PrecioC" class="form-control" />
+                <span asp-validation-for="CostoCasino.PrecioC" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdTipoComida" class="control-label"></label>
-                <input asp-for="IdTipoComida" class="form-control" />
-                <span asp-validation-for="IdTipoComida" class="text-danger"></span>
+                <label for="IdTipoComida">Tipo Comida</label>
+                <select asp-for="CostoCasino.IdTipoComida" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var tipoComida in Model.TipoComida)
+                    {
+                        <option value="@tipoComida.Id">@tipoComida.Nombre</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="IdGrupoEmpleado" class="control-label"></label>
-                <input asp-for="IdGrupoEmpleado" class="form-control" />
-                <span asp-validation-for="IdGrupoEmpleado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreGrupoEmpleado" class="control-label"></label>
-                <input asp-for="NombreGrupoEmpleado" class="form-control" />
-                <span asp-validation-for="NombreGrupoEmpleado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NombreTipoComida" class="control-label"></label>
-                <input asp-for="NombreTipoComida" class="form-control" />
-                <span asp-validation-for="NombreTipoComida" class="text-danger"></span>
+                <label for="IdGrupoEmpleado">Tipo Comida</label>
+                <select asp-for="CostoCasino.IdGrupoEmpleado" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var grupoEmpleado in Model.GruposEmpleado)
+                    {
+                        <option value="@grupoEmpleado.Id">@grupoEmpleado.NombreGrupo</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,7 @@ namespace CasinoApp.Entities.TipoComida
         public int Limite { get; set; }
 
         public bool Cronograma { get; set; }
+
+        public int IdIngredientess {  get; set; }
     }
 }

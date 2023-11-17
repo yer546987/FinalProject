@@ -14,7 +14,6 @@ namespace CasinoApp.Entities.Ingredientes
         public int IdUnidadPesaje { get; set; }
         public string Cantidad { get; set; }
         public int IdInventario { get; set; }
-        public string NombreUnidadPesaje { get; set; }
 
     }
 }

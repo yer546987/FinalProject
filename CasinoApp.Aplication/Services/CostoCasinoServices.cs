@@ -27,10 +27,10 @@ namespace CasinoApp.Aplication.Services
             {
                 if (costoCasino is null)
                     return RequestResult<CostoCasinoDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(costoCasino.NombreTipoComida))
-                    return RequestResult<CostoCasinoDto>.CreateNoSuccess("El costo del casino es requerido");
                 CostoCasino entity = new CostoCasino();
                 entity.Precio = costoCasino.PrecioC;
+                entity.IdGrupoEmpleado = costoCasino.IdGrupoEmpleado;
+                entity.IdTipoComida = costoCasino.IdTipoComida;
                 var result = _Context.CostoCasinos.Add(entity);
                 int rows = _Context.SaveChanges();
                 if (rows is 0)
@@ -65,6 +65,7 @@ namespace CasinoApp.Aplication.Services
                 {
                     result.Add(new CostoCasinoDto()
                     {
+                        IdCostoCasino = item.Id,
                         PrecioC = item.Precio,
                         IdTipoComida = item.IdTipoComida,
                         IdGrupoEmpleado = item.IdGrupoEmpleado
@@ -87,6 +88,7 @@ namespace CasinoApp.Aplication.Services
                 if (costoCasino is null) return RequestResult<CostoCasinoDto>.CreateNoSuccess($"No existe el costo de casino con identificador {idCostoCasino}");
                 var resultado = new CostoCasinoDto()
                 {
+                    IdCostoCasino = costoCasino.Id,
                     PrecioC = costoCasino.Precio,
                     IdTipoComida = costoCasino.IdTipoComida,
                     IdGrupoEmpleado = costoCasino.IdGrupoEmpleado
@@ -99,25 +101,43 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public CostoCasinoDto Update(CostoCasinoDto costoCasino)
+        public RequestResult<CostoCasinoDto> Update(CostoCasinoDto costoCasino)
         {
-            if (costoCasino is null) return null;
-            if (costoCasino.IdCostoCasino is 0) return null;
-            if (string.IsNullOrEmpty(costoCasino.NombreTipoComida)) return null;
-            var entidad = _Context.CostoCasinos
-                                .Where(x => x.Id.Equals(costoCasino.IdTipoComida))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.Precio = costoCasino.PrecioC;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new CostoCasinoDto()
+            try
             {
-                PrecioC = entidad.Precio,
-                IdTipoComida = entidad.IdTipoComida,
-                IdGrupoEmpleado = entidad.IdGrupoEmpleado
-            };
+                if (costoCasino == null || costoCasino.IdCostoCasino == 0)
+                {
+                    return RequestResult<CostoCasinoDto>.CreateNoSuccess("Datos incorrectos para la actualización.");
+                }
+
+                var entidad = _Context.CostoCasinos
+                                      .Where(x => x.Id.Equals(costoCasino.IdCostoCasino))
+                                      .FirstOrDefault();
+
+                if (entidad == null)
+                {
+                    return RequestResult<CostoCasinoDto>.CreateNoSuccess("CostoCasino no encontrado para la actualización.");
+                }
+
+                entidad.Precio = costoCasino.PrecioC;
+
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                return RequestResult<CostoCasinoDto>.CreateSuccess(new CostoCasinoDto
+                {
+                    PrecioC = entidad.Precio,
+                    IdTipoComida = entidad.IdTipoComida,
+                    IdGrupoEmpleado = entidad.IdGrupoEmpleado,
+                    IdCostoCasino = entidad.Id
+                });
+            }
+            catch (Exception ex)
+            {
+                return RequestResult<CostoCasinoDto>.CreateError($"Ha ocurrido un error: {ex.Message}");
+            }
         }
+
     }
 }

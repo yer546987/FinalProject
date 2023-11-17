@@ -19,27 +19,17 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdTipoComida)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTipoComida)
+        <dd class="col-sm-10">
+            @ViewBag.TipoComida[Model.IdTipoComida]
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdGrupoEmpleado)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdGrupoEmpleado)
+        <dd class="col-sm-10">
+            @ViewBag.GruposEmpleado[Model.IdGrupoEmpleado]
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreGrupoEmpleado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreGrupoEmpleado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreTipoComida)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreTipoComida)
-        </dd>
+ 
+ 
     </dl>
 </div>
 <div>

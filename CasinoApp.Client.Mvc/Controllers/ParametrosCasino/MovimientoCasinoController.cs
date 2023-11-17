@@ -10,6 +10,11 @@ using CasinoApp.Entities.MovimientoCasino;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.TipoEmpleado;
+using CasinoApp.Entities.Empleado;
+using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.TipoDocumento;
+using CasinoApp.Entities.TipoComida;
+using CasinoApp.Client.Mvc.Models.ViewModels;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
 {
@@ -27,102 +32,115 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
         {
             MVAHttpClient client = new MVAHttpClient();
             var resultado = client.Get<RequestResult<List<MovimientoCasinoDto>>>("/api/MovimientoCasino");
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var Empleado = client.Get<RequestResult<List<EmpleadoDto>>>("/api/Empleado").Result;
             if (resultado.IsSuccessful)
             {
+                ViewBag.TiposEmpleados = tipoComida.ToDictionary(x => x.Id, x => x.Nombre);
+                ViewBag.GruposEmpleado = gruposEmpleado.ToDictionary(x => x.Id, x => x.NombreGrupo);
+                ViewBag.Empleado = Empleado.ToDictionary(x => x.IdEmpleado, x => x.NombreEmpleado);
+
                 return View(resultado.Result);
             }
             return NotFound();
         }
 
         // GET: MovimientoCasino/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null || _context.MovimientoCasinoDto == null)
+         
+            MVAHttpClient client = new MVAHttpClient();
+            var movimientoCasinoResult = client.Get<RequestResult<MovimientoCasinoDto>>($"/api/MovimientoCasino/{id}");
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var Empleado = client.Get<RequestResult<List<EmpleadoDto>>>("/api/Empleado").Result;
+            if (movimientoCasinoResult.IsSuccessful)
             {
-                return NotFound();
+                var movimientoCasino = movimientoCasinoResult.Result;
+
+                ViewBag.TipoComida = tipoComida.ToDictionary(x => x.Id, x => x.Nombre);
+                ViewBag.GrupoEmpleado = gruposEmpleado.ToDictionary(x => x.Id, x => x.NombreGrupo);
+                ViewBag.Empleado = Empleado.ToDictionary(x => x.IdEmpleado, x => x.NombreEmpleado);
+                return View(movimientoCasino);
             }
 
-            var movimientoCasinoDto = await _context.MovimientoCasinoDto
-                .FirstOrDefaultAsync(m => m.IdMovimientoCasino == id);
-            if (movimientoCasinoDto == null)
-            {
-                return NotFound();
-            }
-
-            return View(movimientoCasinoDto);
+            return NotFound();
         }
 
         // GET: MovimientoCasino/Create
         public IActionResult Create()
         {
-            return View();
+            MVAHttpClient client = new MVAHttpClient();
+
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var Empleado = client.Get<RequestResult<List<EmpleadoDto>>>("/api/Empleado").Result;
+
+            var viewModel = new CUMovimientoCasinoViewModel
+            {
+                grupoEmpleados = gruposEmpleado,
+                empleado = Empleado,
+                tipoComida = tipoComida
+            };
+
+            return View(viewModel);
         }
 
         // POST: MovimientoCasino/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdMovimientoCasino,Costo,IdTipoComida,IdGrupoEmpleado,HoraRegistro,IdEmpleado,NombreEmpleado,NombreGrupoEmpleado,NombreTipoComida")] MovimientoCasinoDto movimientoCasinoDto)
+        public IActionResult Create(CUMovimientoCasinoViewModel movimientoCasinoDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<MovimientoCasinoDto>>("/api/MovimientoCasino", movimientoCasinoDto.movimientoCasino);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(movimientoCasinoDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(movimientoCasinoDto);
+            return NotFound();
         }
 
         // GET: MovimientoCasino/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.MovimientoCasinoDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<MovimientoCasinoDto>>($"/api/MovimientoCasino/{id}");
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            var gruposEmpleado = client.Get<RequestResult<List<GrupoEmpleadoDto>>>("/api/GrupoEmpleado").Result;
+            var Empleado = client.Get<RequestResult<List<EmpleadoDto>>>("/api/Empleado").Result;
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                var viewModel = new CUMovimientoCasinoViewModel
+                {
+                    movimientoCasino = resultado.Result,
+                    tipoComida = tipoComida,
+                    grupoEmpleados = gruposEmpleado,
+                    empleado = Empleado
+                };
+
+                return View(viewModel);
             }
 
-            var movimientoCasinoDto = await _context.MovimientoCasinoDto.FindAsync(id);
-            if (movimientoCasinoDto == null)
-            {
-                return NotFound();
-            }
-            return View(movimientoCasinoDto);
+            return NotFound();
         }
 
         // POST: MovimientoCasino/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdMovimientoCasino,Costo,IdTipoComida,IdGrupoEmpleado,HoraRegistro,IdEmpleado,NombreEmpleado,NombreGrupoEmpleado,NombreTipoComida")] MovimientoCasinoDto movimientoCasinoDto)
+        public IActionResult Edit(CUMovimientoCasinoViewModel movimientoCasinoDto)
         {
-            if (id != movimientoCasinoDto.IdMovimientoCasino)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<MovimientoCasinoDto>>("/api/MovimientoCasino/Update", movimientoCasinoDto.movimientoCasino);
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(movimientoCasinoDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MovimientoCasinoDtoExists(movimientoCasinoDto.IdMovimientoCasino))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(movimientoCasinoDto);
+            return NotFound();
         }
 
         // GET: MovimientoCasino/Delete/5

@@ -1,15 +1,22 @@
-﻿using CasinoApp.Aplication.Contracts;
+﻿using Azure;
+using CasinoApp.Aplication.Contracts;
 using CasinoApp.Aplication.DataAccess;
 using CasinoApp.Aplication.Models;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.TipoComida;
 using CasinoApp.Entities.TipoDocumento;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CasinoApp.Aplication.Services
 {
@@ -17,7 +24,7 @@ namespace CasinoApp.Aplication.Services
     {
         private CasinoAppContext _Context;
 
-        public TipoComidaServices() 
+        public TipoComidaServices()
         {
             _Context = new CasinoAppContext();
         }
@@ -27,10 +34,15 @@ namespace CasinoApp.Aplication.Services
             {
                 if (tipoComida is null)
                     return RequestResult<TipoComidaDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(tipoComida.Nombre))
-                    return RequestResult<TipoComidaDto>.CreateNoSuccess("El nombre del tipo de comida es requerido");
-                TipoComidum entity = new TipoComidum();
+                TipoComida entity = new TipoComida();
                 entity.Nombre = tipoComida.Nombre;
+                entity.Descripcion = tipoComida.Descripcion;
+                entity.Cronograma = tipoComida.Cronograma;
+                entity.Limite = tipoComida.Limite;
+                entity.Precio = tipoComida.Precio;
+                entity.TiempoInicial = tipoComida.TiempoInicial;
+                entity.TiempoFinal = tipoComida.TiempoFinal;
+                entity.IdIngredientes = tipoComida.IdIngredientess;
                 var result = _Context.TipoComida.Add(entity);
                 int rows = _Context.SaveChanges();
                 if (rows is 0)
@@ -44,15 +56,16 @@ namespace CasinoApp.Aplication.Services
                     Limite = result.Entity.Limite,
                     Precio = result.Entity.Precio,
                     TiempoFinal = result.Entity.TiempoFinal,
-                    TiempoInicial = result.Entity.TiempoInicial
+                    TiempoInicial = result.Entity.TiempoInicial,
+                    IdIngredientess = result.Entity.IdIngredientes
 
                 };
                 return RequestResult<TipoComidaDto>.CreateSuccess(resultado);
-            
+
             }
             catch (Exception ex)
             {
-                return RequestResult<TipoComidaDto>.CreateError(ex.Message);    
+                return RequestResult<TipoComidaDto>.CreateError(ex.Message);
             }
         }
 
@@ -78,7 +91,8 @@ namespace CasinoApp.Aplication.Services
                         Limite = item.Limite,
                         Precio = item.Precio,
                         TiempoFinal = item.TiempoFinal,
-                        TiempoInicial = item.TiempoInicial
+                        TiempoInicial = item.TiempoInicial,
+                        IdIngredientess = item.IdIngredientes
                     });
                 }
                 return RequestResult<List<TipoComidaDto>>.CreateSuccess(result);
@@ -106,7 +120,8 @@ namespace CasinoApp.Aplication.Services
                     Limite = tipoComida.Limite,
                     Precio = tipoComida.Precio,
                     TiempoFinal = tipoComida.TiempoFinal,
-                    TiempoInicial = tipoComida.TiempoInicial
+                    TiempoInicial = tipoComida.TiempoInicial,
+                    IdIngredientess = tipoComida.IdIngredientes
                 };
                 return RequestResult<TipoComidaDto>.CreateSuccess(resultado);
 
@@ -117,30 +132,56 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public TipoComidaDto Update(TipoComidaDto tipoComida)
+        public RequestResult<TipoComidaDto> Update(TipoComidaDto tipoComida)
         {
-            if (tipoComida is null) return null;
-            if (tipoComida.Id is 0) return null;
-            if (string.IsNullOrEmpty(tipoComida.Nombre)) return null;
-            var entidad = _Context.TipoComida
-                                .Where(x => x.Id.Equals(tipoComida.Id))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.Nombre = tipoComida.Nombre;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new TipoComidaDto()
+            try
             {
-                Id = entidad.Id,
-                Nombre = entidad.Nombre,
-                Descripcion = entidad.Descripcion,
-                Cronograma = entidad.Cronograma,
-                Limite = entidad.Limite,
-                Precio = entidad.Precio,
-                TiempoFinal = entidad.TiempoFinal,
-                TiempoInicial = entidad.TiempoInicial
-            };
+                if (tipoComida == null || tipoComida.Id == 0 || string.IsNullOrEmpty(tipoComida.Nombre))
+                {
+                    return RequestResult<TipoComidaDto>.CreateNoSuccess("Datos de TipoComida no válidos");
+                }
+
+                var entidad = _Context.TipoComida
+                                        .FirstOrDefault(x => x.Id.Equals(tipoComida.Id));
+
+                if (entidad == null)
+                {
+                    return RequestResult<TipoComidaDto>.CreateNoSuccess("TipoComida no encontrada");
+                }
+
+                entidad.Nombre = tipoComida.Nombre;
+                entidad.Descripcion = tipoComida.Descripcion;
+                entidad.Cronograma = tipoComida.Cronograma;
+                entidad.Limite = tipoComida.Limite;
+                entidad.Precio = tipoComida.Precio;
+                entidad.TiempoInicial = tipoComida.TiempoInicial;
+                entidad.TiempoFinal = tipoComida.TiempoFinal;
+                entidad.IdIngredientes = tipoComida.IdIngredientess;
+
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                var resultado = new TipoComidaDto()
+                {
+                    Id = entidad.Id,
+                    Nombre = entidad.Nombre,
+                    Descripcion = entidad.Descripcion,
+                    Cronograma = entidad.Cronograma,
+                    Limite = entidad.Limite,
+                    Precio = entidad.Precio,
+                    TiempoInicial = entidad.TiempoInicial,
+                    TiempoFinal = entidad.TiempoFinal,
+                    IdIngredientess = entidad.IdIngredientes
+                };
+
+                return RequestResult<TipoComidaDto>.CreateSuccess(resultado);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar TipoComida: {ex.Message}");
+                return RequestResult<TipoComidaDto>.CreateError($"Error al actualizar TipoComida: {ex.Message}");
+            }
         }
     }
 }

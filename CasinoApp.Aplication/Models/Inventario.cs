@@ -21,5 +21,5 @@ public partial class Inventario
 
     public int IdInventario { get; set; }
 
-    public virtual UnidadMedidum IdUnidadMedidaNavigation { get; set; }
+    public virtual UnidadMedida IdUnidadMedidaNavigation { get; set; }
 }

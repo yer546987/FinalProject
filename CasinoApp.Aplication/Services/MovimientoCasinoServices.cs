@@ -29,16 +29,19 @@ namespace CasinoApp.Aplication.Services
             {
                 if (movimientoCasino is null)
                     return RequestResult<MovimientoCasinoDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(movimientoCasino.NombreEmpleado))
-                    return RequestResult<MovimientoCasinoDto>.CreateNoSuccess("El nombre del empleado es requerido");
                 MovimientoCasino entity = new MovimientoCasino();
                 entity.HoraRegistro = movimientoCasino.HoraRegistro;
+                entity.Costo = movimientoCasino.Costo;
+                entity.IdTipoComida = movimientoCasino.IdTipoComida;
+                entity.IdGrupoEmpleado = movimientoCasino.IdGrupoEmpleado;
+                entity.IdEmpleado = movimientoCasino.IdEmpleado;
                 var result = _Context.MovimientoCasinos.Add(entity);
                 int rows = _Context.SaveChanges();
                 if (rows is 0)
                     return RequestResult<MovimientoCasinoDto>.CreateNoSuccess("Ha ocurrido un error al registrar el movimiento de casino.");
                 var resultado = new MovimientoCasinoDto()
                 {
+                    IdMovimientoCasino = result.Entity.Id,
                     Costo = result.Entity.Costo,
                     HoraRegistro = result.Entity.HoraRegistro,
                     IdEmpleado = result.Entity.IdEmpleado,
@@ -47,7 +50,6 @@ namespace CasinoApp.Aplication.Services
 
                 };
                 return RequestResult<MovimientoCasinoDto>.CreateSuccess(resultado);
-
 
             }
             catch (Exception ex)
@@ -71,6 +73,7 @@ namespace CasinoApp.Aplication.Services
                 {
                     result.Add(new MovimientoCasinoDto()
                     {
+                        IdMovimientoCasino = item.Id,
                         Costo = item.Costo,
                         HoraRegistro = item.HoraRegistro,
                         IdEmpleado = item.IdEmpleado,
@@ -97,6 +100,7 @@ namespace CasinoApp.Aplication.Services
                 if (movimientoCasino is null) return RequestResult<MovimientoCasinoDto>.CreateNoSuccess($"No existe el movimiento de casino con identificador {idMovimientoCasino}");
                 var resultado = new MovimientoCasinoDto()
                 {
+                    IdMovimientoCasino = movimientoCasino.Id,
                     Costo = movimientoCasino.Costo,
                     HoraRegistro = movimientoCasino.HoraRegistro,
                     IdEmpleado = movimientoCasino.IdEmpleado,
@@ -113,27 +117,45 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public MovimientoCasinoDto Update(MovimientoCasinoDto movimientoCasino)
+        public RequestResult<MovimientoCasinoDto> Update(MovimientoCasinoDto movimientoCasino)
         {
-            if (movimientoCasino is null) return null;
-            if (movimientoCasino.IdMovimientoCasino is 0) return null;
-            if (string.IsNullOrEmpty(movimientoCasino.NombreEmpleado)) return null;
-            var entidad = _Context.MovimientoCasinos
-                                .Where(x => x.Id.Equals(movimientoCasino.IdMovimientoCasino))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.Costo = movimientoCasino.Costo;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new MovimientoCasinoDto()
+            try
             {
-                Costo = entidad.Costo,
-                HoraRegistro = entidad.HoraRegistro,
-                IdEmpleado = entidad.IdEmpleado,
-                IdTipoComida = entidad.IdTipoComida,
-                IdGrupoEmpleado = entidad.IdGrupoEmpleado
-            };
+                if (movimientoCasino == null || movimientoCasino.IdMovimientoCasino == 0)
+                {
+                    return RequestResult<MovimientoCasinoDto>.CreateNoSuccess("Datos incorrectos para la actualización.");
+                }
+
+                var entidad = _Context.MovimientoCasinos
+                                      .Where(x => x.Id.Equals(movimientoCasino.IdMovimientoCasino))
+                                      .FirstOrDefault();
+
+                if (entidad == null)
+                {
+                    return RequestResult<MovimientoCasinoDto>.CreateNoSuccess("MovimientoCasino no encontrado para la actualización.");
+                }
+
+                entidad.Costo = movimientoCasino.Costo;
+
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                return RequestResult<MovimientoCasinoDto>.CreateSuccess(new MovimientoCasinoDto
+                {
+                    Costo = entidad.Costo,
+                    HoraRegistro = entidad.HoraRegistro,
+                    IdEmpleado = entidad.IdEmpleado,
+                    IdTipoComida = entidad.IdTipoComida,
+                    IdGrupoEmpleado = entidad.IdGrupoEmpleado,
+                    IdMovimientoCasino = entidad.Id 
+                });
+            }
+            catch (Exception ex)
+            {
+                return RequestResult<MovimientoCasinoDto>.CreateError($"Ha ocurrido un error: {ex.Message}");
+            }
         }
+
     }
 }

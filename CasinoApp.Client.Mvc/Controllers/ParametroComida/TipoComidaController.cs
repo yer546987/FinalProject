@@ -10,6 +10,10 @@ using CasinoApp.Entities.TipoComida;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.Ingredientes;
+using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.TipoEmpleado;
+using CasinoApp.Client.Mvc.Models.ViewModels;
+using CasinoApp.Entities.TipoDocumento;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
 {
@@ -27,102 +31,105 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
         {
             MVAHttpClient client = new MVAHttpClient();
             var resultado = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida");
+            var ingredientes = client.Get<RequestResult<List<IngredientesDto>>>("/api/Ingredientes").Result;
             if (resultado.IsSuccessful)
             {
+                ViewBag.Ingredientes = ingredientes.ToDictionary(x => x.Id, x => x.Cantidad);
                 return View(resultado.Result);
             }
             return NotFound();
         }
 
         // GET: TipoComida/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.tipoComida == null)
+            if (id is null)
             {
                 return NotFound();
             }
 
-            var tipoComidaDto = await _context.tipoComida
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tipoComidaDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var tipoComidaResult = client.Get<RequestResult<TipoComidaDto>>($"/api/TipoComida/{id}");
+            var ingredientes = client.Get<RequestResult<List<IngredientesDto>>>("/api/Ingredientes").Result;
+            if (tipoComidaResult.IsSuccessful)
             {
-                return NotFound();
+                var tipocomida = tipoComidaResult.Result;
+
+                ViewBag.Ingredientes = ingredientes.ToDictionary(x => x.Id, x => x.IdUnidadPesaje);
+                return View(tipocomida);
             }
 
-            return View(tipoComidaDto);
+            return NotFound();
         }
 
         // GET: TipoComida/Create
         public IActionResult Create()
         {
-            return View();
+            MVAHttpClient client = new MVAHttpClient();
+            var ingredientes = client.Get<RequestResult<List<IngredientesDto>>>("/api/Ingredientes").Result;
+            var viewModel = new CUTipoComidaViewModel
+            {
+                ingredientes = ingredientes
+            };
+
+            return View(viewModel);
         }
 
         // POST: TipoComida/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Precio,Descripcion,TiempoInicial,TiempoFinal,Limite,Cronograma")] TipoComidaDto tipoComidaDto)
+        public IActionResult Create(CUTipoComidaViewModel tipoComidaViewModel)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<TipoComidaDto>>("/api/TipoComida", tipoComidaViewModel.tipoComida);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(tipoComidaDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(tipoComidaDto);
+            return NotFound();
         }
+
 
         // GET: TipoComida/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.tipoComida == null)
+            MVAHttpClient client = new MVAHttpClient();
+
+            var resultadoTipoComida = client.Get<RequestResult<TipoComidaDto>>($"/api/TipoComida/{id}");
+            var ingredientes = client.Get<RequestResult<List<IngredientesDto>>>("/api/Ingredientes").Result;
+
+            if (resultadoTipoComida.IsSuccessful)
             {
-                return NotFound();
+                var viewModel = new CUTipoComidaViewModel
+                {
+                    tipoComida = resultadoTipoComida.Result,  
+                    ingredientes = ingredientes
+                };
+
+                return View(viewModel);
             }
 
-            var tipoComidaDto = await _context.tipoComida.FindAsync(id);
-            if (tipoComidaDto == null)
-            {
-                return NotFound();
-            }
-            return View(tipoComidaDto);
+            return NotFound();
         }
+
 
         // POST: TipoComida/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Precio,Descripcion,TiempoInicial,TiempoFinal,Limite,Cronograma")] TipoComidaDto tipoComidaDto)
+        public IActionResult  Edit(CUTipoComidaViewModel tipoComidaDto)
         {
-            if (id != tipoComidaDto.Id)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<TipoComidaDto>>("/api/TipoComida/Update", tipoComidaDto.tipoComida);
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(tipoComidaDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TipoComidaDtoExists(tipoComidaDto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(tipoComidaDto);
+            return NotFound();
         }
 
         // GET: TipoComida/Delete/5
