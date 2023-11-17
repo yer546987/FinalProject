@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CasinoApp.Entities.CostoCasino.CostoCasinoDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoComida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdGrupoEmpleado)
+            </th>
+ 
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioC)
+            </td>
+                <td>
+                    @ViewBag.TipoComida[item.IdTipoComida]
+                </td>
+                <td>
+                    @ViewBag.GruposEmpleado[item.IdGrupoEmpleado]
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCostoCasino">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCostoCasino">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCostoCasino">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

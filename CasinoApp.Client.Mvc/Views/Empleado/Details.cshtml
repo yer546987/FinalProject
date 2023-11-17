@@ -1,0 +1,61 @@
+﻿@model CasinoApp.Entities.Empleado.EmpleadoDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EmpleadoDto</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreEmpleado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreEmpleado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApellidoE)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApellidoE)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTipoIdentificacionE)
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.TiposIdentificacion[Model.IdTipoIdentificacionE]
+        </dd>        
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdentificacionE)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdentificacionE)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTipoEmpleadoE)
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.TiposEmpleados[Model.IdTipoEmpleadoE]
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdGrupoEE)
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.GruposEmpleado[Model.IdGrupoEE]
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InternoE)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InternoE)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdEmpleado">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

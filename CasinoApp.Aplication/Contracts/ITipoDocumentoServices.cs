@@ -11,7 +11,7 @@ namespace CasinoApp.Aplication.Contracts
 {
     public interface ITipoDocumentoServices
     {
-        public TipoDocumentoDto Update(TipoDocumentoDto tipoDocumento);
+        public RequestResult<TipoDocumentoDto> Update(TipoDocumentoDto tipoDocumento);
         public bool Delete(int idTipoDocumento);
 
         public RequestResult<List<TipoDocumentoDto>> GetAll();

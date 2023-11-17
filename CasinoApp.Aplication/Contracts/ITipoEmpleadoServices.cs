@@ -10,7 +10,7 @@ namespace CasinoApp.Aplication.Contracts
 {
     public interface ITipoEmpleadoServices
     {
-        public TipoEmpleadoDto Update(TipoEmpleadoDto tipoEmpleado);
+        public RequestResult<TipoEmpleadoDto> Update(TipoEmpleadoDto tipoEmpleado);
         public bool Delete(int idTipoEmpleado);
 
         public RequestResult<List<TipoEmpleadoDto>> GetAll();

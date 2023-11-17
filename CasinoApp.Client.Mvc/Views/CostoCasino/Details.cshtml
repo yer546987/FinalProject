@@ -1,0 +1,38 @@
+﻿@model CasinoApp.Entities.CostoCasino.CostoCasinoDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CostoCasinoDto</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecioC)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrecioC)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTipoComida)
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.TipoComida[Model.IdTipoComida]
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdGrupoEmpleado)
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.GruposEmpleado[Model.IdGrupoEmpleado]
+        </dd>
+ 
+ 
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdCostoCasino">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

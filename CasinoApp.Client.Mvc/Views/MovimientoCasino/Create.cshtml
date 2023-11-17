@@ -1,0 +1,68 @@
+﻿@model CasinoApp.Client.Mvc.Models.ViewModels.CUMovimientoCasinoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>MovimientoCasinoDto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="movimientoCasino.Costo" class="control-label"></label>
+                <input asp-for="movimientoCasino.Costo" class="form-control" />
+                <span asp-validation-for="movimientoCasino.Costo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="movimientoCasino.HoraRegistro" class="control-label"></label>
+                <input asp-for="movimientoCasino.HoraRegistro" class="form-control" />
+                <span asp-validation-for="movimientoCasino.HoraRegistro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="IdEmpleado">empleado</label>
+                <select asp-for="movimientoCasino.IdEmpleado" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var Empleado in Model.empleado)
+                    {
+                        <option value="@Empleado.IdEmpleado">@Empleado.NombreEmpleado</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="IdGrupoEmpleado">Grupo Empleado</label>
+                <select asp-for="movimientoCasino.IdGrupoEmpleado" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var grupoEmpleado in Model.grupoEmpleados)
+                    {
+                        <option value="@grupoEmpleado.Id">@grupoEmpleado.NombreGrupo</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="IdTipoComida">Tipo Comida</label>
+                <select asp-for="movimientoCasino.IdTipoComida" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var tipoComida in Model.tipoComida)
+                    {
+                        <option value="@tipoComida.Id">@tipoComida.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,4 +1,7 @@
-﻿using CasinoApp.Client.Models;
+﻿using CasinoApp.Client.Helper;
+using CasinoApp.Client.Models;
+using CasinoApp.Entities.Empleado;
+using CasinoApp.Entities.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,7 +18,13 @@ namespace CasinoApp.Client.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<List<EmpleadoDto>>>("/Api/Empleado");
+            if (resultado.IsSuccessful)
+            {
+                return View(resultado.Result);
+            }
+            return NotFound();
         }
 
         public IActionResult Privacy()

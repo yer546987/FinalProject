@@ -10,7 +10,7 @@ namespace CasinoApp.Aplication.Contracts
 {
     public interface ICostoCasinoServices
     {
-        public CostoCasinoDto Update(CostoCasinoDto costoCasino);
+        public RequestResult<CostoCasinoDto> Update(CostoCasinoDto costoCasino);
         public bool Delete(int idConstoCasino);
 
         public RequestResult<List<CostoCasinoDto>> GetAll();

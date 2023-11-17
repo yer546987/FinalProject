@@ -1,4 +1,5 @@
-﻿using CasinoApp.Entities.GrupoEmpleado;
+﻿using CasinoApp.Entities.Empleado;
+using CasinoApp.Entities.GrupoEmpleado;
 using CasinoApp.Entities.Http;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace CasinoApp.Aplication.Contracts
 {
     public interface IGrupoEmpleadoServices
     {
-        public GrupoEmpleadoDto Update(GrupoEmpleadoDto grupoEmpleado);
+        public RequestResult<GrupoEmpleadoDto> Update(GrupoEmpleadoDto grupoEmpleado);
         public bool Delete(int idGrupoEmpleado);
 
         public RequestResult<List<GrupoEmpleadoDto>> GetAll();

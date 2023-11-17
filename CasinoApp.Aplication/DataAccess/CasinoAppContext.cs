@@ -30,13 +30,13 @@ public partial class CasinoAppContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<TipoComidum> TipoComida { get; set; }
+    public virtual DbSet<TipoComida> TipoComida { get; set; }
 
     public virtual DbSet<TipoDocumento> TipoDocumentos { get; set; }
 
     public virtual DbSet<TipoEmpleado> TipoEmpleados { get; set; }
 
-    public virtual DbSet<UnidadMedidum> UnidadMedida { get; set; }
+    public virtual DbSet<UnidadMedida> UnidadMedida { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -50,12 +50,12 @@ public partial class CasinoAppContext : DbContext
         {
             entity.ToTable("CostoCasino");
 
-            entity.HasOne(d => d.IdGrupoEmpleadoNavigation).WithMany(p => p.CostoCasinos)
+            entity.HasOne(d => d.GrupoEmpleado).WithMany(p => p.CostoCasinos)
                 .HasForeignKey(d => d.IdGrupoEmpleado)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CostoCasino_GrupoEmpleado");
 
-            entity.HasOne(d => d.IdTipoComidaNavigation).WithMany(p => p.CostoCasinos)
+            entity.HasOne(d => d.TipoComida).WithMany(p => p.CostoCasinos)
                 .HasForeignKey(d => d.IdTipoComida)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CostoCasino_TipoComida");
@@ -69,23 +69,23 @@ public partial class CasinoAppContext : DbContext
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsFixedLength();
-            entity.Property(e => e.Identificacion).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Identificacion).HasColumnType("int");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasMaxLength(50)
                 .IsFixedLength();
 
-            entity.HasOne(d => d.IdGrupoENavigation).WithMany(p => p.Empleados)
+            entity.HasOne(d => d.GrupoE).WithMany(p => p.Empleados)
                 .HasForeignKey(d => d.IdGrupoE)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Empleado_GrupoEmpleado");
 
-            entity.HasOne(d => d.IdTipoEmpleadoNavigation).WithMany(p => p.Empleados)
+            entity.HasOne(d => d.TipoEmpleado).WithMany(p => p.Empleados)
                 .HasForeignKey(d => d.IdTipoEmpleado)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Empleado_TipoEmpleado");
 
-            entity.HasOne(d => d.IdTipoIdentificacionNavigation).WithMany(p => p.Empleados)
+            entity.HasOne(d => d.TipoDocumento).WithMany(p => p.Empleados)
                 .HasForeignKey(d => d.IdTipoIdentificacion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Empleado_TipoDocumentos");
@@ -110,7 +110,7 @@ public partial class CasinoAppContext : DbContext
                 .HasMaxLength(10)
                 .IsFixedLength();
 
-            entity.HasOne(d => d.IdInventarioNavigation).WithMany(p => p.Ingredientes)
+            entity.HasOne(d => d.UnidadMedida).WithMany(p => p.Ingredientes)
                 .HasForeignKey(d => d.IdInventario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Inventario_UnidadMedida");
@@ -142,17 +142,17 @@ public partial class CasinoAppContext : DbContext
 
             entity.Property(e => e.HoraRegistro).HasColumnType("datetime");
 
-            entity.HasOne(d => d.IdEmpleadoNavigation).WithMany(p => p.MovimientoCasinos)
+            entity.HasOne(d => d.empleado).WithMany(p => p.MovimientoCasinos)
                 .HasForeignKey(d => d.IdEmpleado)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_MovimientoCasino_Empleado");
 
-            entity.HasOne(d => d.IdGrupoEmpleadoNavigation).WithMany(p => p.MovimientoCasinos)
+            entity.HasOne(d => d.grupoempleado).WithMany(p => p.MovimientoCasinos)
                 .HasForeignKey(d => d.IdGrupoEmpleado)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_MovimientoCasino_GrupoEmpleado");
 
-            entity.HasOne(d => d.IdTipoComidaNavigation).WithMany(p => p.MovimientoCasinos)
+            entity.HasOne(d => d.tipoComida).WithMany(p => p.MovimientoCasinos)
                 .HasForeignKey(d => d.IdTipoComida)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_MovimientoCasino_TipoComida");
@@ -167,9 +167,9 @@ public partial class CasinoAppContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<TipoComidum>(entity =>
+        modelBuilder.Entity<TipoComida>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Descripcion)
                 .IsRequired()
                 .HasMaxLength(50)
@@ -181,7 +181,7 @@ public partial class CasinoAppContext : DbContext
             entity.Property(e => e.TiempoFinal).HasColumnType("datetime");
             entity.Property(e => e.TiempoInicial).HasColumnType("datetime");
 
-            entity.HasOne(d => d.IdIngredientesNavigation).WithMany(p => p.TipoComida)
+            entity.HasOne(d => d.ingredientes).WithMany(p => p.TipoComida)
                 .HasForeignKey(d => d.IdIngredientes)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TipoComida_Ingredientes");
@@ -205,7 +205,7 @@ public partial class CasinoAppContext : DbContext
                 .IsFixedLength();
         });
 
-        modelBuilder.Entity<UnidadMedidum>(entity =>
+        modelBuilder.Entity<UnidadMedida>(entity =>
         {
             entity.Property(e => e.Nombre)
                 .IsRequired()
