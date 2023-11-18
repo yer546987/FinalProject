@@ -4,31 +4,76 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<form method="post">
+    <div class="row">
+        <p>
+            <div class="col-xs-12 col-sm-5">
+                <h3>Registro de movimientos de casino</h3>
+            </div>
+            <div class="col-xs-12 col-sm-2 push-md-3"></div>
+            <div class="col-xs-12 col-sm-3"></div>
+            <div class="col-xs-12 col-sm-2 push-md-3">
+                @*         @if (User.Identity.IsAuthenticated)
+                { *@
+                <a asp-action="Create">
+                    <input type="button" class="form-control btn btn-info" value="Crear" />
+                </a>
+                @*  } *@
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+            </div>
+        </p>
+    </div>
+</form>
+<hr />
+<div style="display: flex; justify-content: flex-start;">
+    <div style="width: 100%; height: 110px;">
+        <form method="post" class="row align-items-end">
+            <div class="form-group col-md-3 text-end" style="margin-top: 13px;">
+                <label class="control-label" @* asp-for="StartDate" *@>Fecha inicial</label>
+                <input type="date" class="form-control" id="startDate" @* asp-for="StartDate" *@ />
+            </div>
+            <div class="form-group col-md-3 text-end" style="margin-top: 13px;">
+                <label class="control-label" @* asp-for="EndDate" *@>Fecha final</label>
+                <input type="date" class="form-control" name="endDate" @* asp-for="EndDate" *@ />
+            </div>
+            <div class="form-group col-md-3" style="margin-top: 13px;">
+                <label class="control-label">Tipo de comida</label>
+                <select class="form-control" @* asp-for="FoodTypeId" *@>
+                    <option value="">Todos</option>
+        @*                @foreach (var foodType in Model.)
+                    { *@
+            @*         <option value="@foodType.Id">@foodType.Name</option>
+                    } *@
+                </select>
+            </div>
+            <div class="form-group" style="margin-top: 13px;">
+                <button asp-action="ApplyFilter" class="btn btn-outline-success" type="submit">Filtrar</button>
+                <button asp-action="Export" class="btn btn-outline-success" type="submit">Exportar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Costo)
+                <label class="control-label">Empleado</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HoraRegistro)
+                <label class="control-label">Grupo Empleado</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdTipoComida)
+                <label class="control-label">Tipo Comida</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdGrupoEmpleado)
+                <label class="control-label">Costo</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdEmpleado)
+                <label class="control-label">Hora Registro</label>
             </th>
-
-            <th></th>
+            <th class ="text-center">
+                Opciones
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -36,24 +81,37 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Costo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HoraRegistro)
+                    @ViewBag.Empleado[item.IdEmpleado]
                 </td>
                 <td>
                     @ViewBag.GruposEmpleado[item.IdGrupoEmpleado]
                 </td>
                 <td>
-                    @ViewBag.Empleado[item.IdEmpleado]
-                </td>
-                <td>
                     @ViewBag.TiposEmpleados[item.IdTipoComida]
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdMovimientoCasino">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdMovimientoCasino">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdMovimientoCasino">Delete</a>
+                    @Html.DisplayFor(modelItem => item.Costo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraRegistro)
+                </td>
+                <td class="text-center">
+                    <a asp-action="Edit" class="btn btn-sm btn-outline-secondary me-2" asp-route-id="@item.IdMovimientoCasino">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                        </svg>
+                    </a> |
+                    <a asp-action="Details" class="btn btn-sm btn-outline-secondary me-2" asp-route-id="@item.IdMovimientoCasino">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                    </a> |
+                    <a asp-action="Delete" class="btn btn-sm btn-outline-danger me-2" asp-route-id="@item.IdMovimientoCasino">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                        </svg>
+                    </a>
                 </td>
             </tr>
         }
