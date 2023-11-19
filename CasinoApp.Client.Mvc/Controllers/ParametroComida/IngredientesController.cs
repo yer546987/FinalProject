@@ -63,7 +63,7 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdUnidadPesaje,Cantidad,IdInventario,NombreUnidadPesaje")] IngredientesDto ingredientesDto)
+        public async Task<IActionResult> Create([Bind("Id,IdTipoComida,Cantidad,IdProducto,NombreUnidadPesaje")] IngredientesDto ingredientesDto)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdUnidadPesaje,Cantidad,IdInventario,NombreUnidadPesaje")] IngredientesDto ingredientesDto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdTipoComida,Cantidad,IdProducto,NombreUnidadPesaje")] IngredientesDto ingredientesDto)
         {
             if (id != ingredientesDto.Id)
             {

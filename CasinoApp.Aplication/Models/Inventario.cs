@@ -7,19 +7,11 @@ public partial class Inventario
 {
     public int Id { get; set; }
 
-    public string Producto { get; set; }
-
-    public DateTime FechaVencimiento { get; set; }
-
-    public int Stock { get; set; }
-
-    public int IdUnidadMedida { get; set; }
+    public int IdProducto { get; set; }
 
     public double Cantidad { get; set; }
 
-    public string Mecatos { get; set; }
+    public int Stock { get; set; }
 
-    public int IdInventario { get; set; }
-
-    public virtual UnidadMedida IdUnidadMedidaNavigation { get; set; }
+    public virtual Producto IdProductoNavigation { get; set; }
 }

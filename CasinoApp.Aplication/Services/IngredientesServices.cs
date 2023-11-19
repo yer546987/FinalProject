@@ -27,8 +27,7 @@ namespace CasinoApp.Aplication.Services
             {
                 if (ingredientes is null)
                     return RequestResult<IngredientesDto>.CreateNoSuccess("Los datos son requeridos");
-                if (string.IsNullOrEmpty(ingredientes.Cantidad))
-                    return RequestResult<IngredientesDto>.CreateNoSuccess("La cantidad de ingredientes es requerido");
+               
                 Ingrediente entity = new Ingrediente();
                 entity.Cantidad = ingredientes.Cantidad;
                 var result = _Context.Ingredientes.Add(entity);
@@ -39,8 +38,8 @@ namespace CasinoApp.Aplication.Services
                 {
                     Cantidad = result.Entity.Cantidad,
                     Id = result.Entity.Id,
-                    IdInventario = result.Entity.IdInventario,
-                    IdUnidadPesaje = result.Entity.IdUnidadPesaje
+                    IdProducto = result.Entity.IdProducto,
+                    IdTipoComida = result.Entity.IdTipoComida
                 };
                 return RequestResult<IngredientesDto>.CreateSuccess(resultado);
 
@@ -68,8 +67,8 @@ namespace CasinoApp.Aplication.Services
                     {
                         Cantidad = item.Cantidad,
                         Id = item.Id,
-                        IdInventario = item.IdInventario,
-                        IdUnidadPesaje = item.IdUnidadPesaje
+                        IdProducto = item.IdProducto,
+                        IdTipoComida = item.IdTipoComida
                     });
                 }
                 return RequestResult<List<IngredientesDto>>.CreateSuccess(result);
@@ -92,8 +91,8 @@ namespace CasinoApp.Aplication.Services
                 {
                     Cantidad = ingredientes.Cantidad,
                     Id = ingredientes.Id,
-                    IdInventario = ingredientes.IdInventario,
-                    IdUnidadPesaje = ingredientes.IdUnidadPesaje
+                    IdProducto = ingredientes.IdProducto,
+                    IdTipoComida = ingredientes.IdTipoComida
                 };
                 return RequestResult<IngredientesDto>.CreateSuccess(resultado);
             }
@@ -107,7 +106,6 @@ namespace CasinoApp.Aplication.Services
         {
             if (ingredientes is null) return null;
             if (ingredientes.Id is 0) return null;
-            if (string.IsNullOrEmpty(ingredientes.Cantidad)) return null;
             var entidad = _Context.Ingredientes
                                 .Where(x => x.Id.Equals(ingredientes.Id))
                                 .FirstOrDefault();
@@ -120,8 +118,8 @@ namespace CasinoApp.Aplication.Services
             {
                 Cantidad = entidad.Cantidad,
                 Id = entidad.Id,
-                IdInventario = entidad.IdInventario,
-                IdUnidadPesaje = entidad.IdUnidadPesaje
+                IdProducto = entidad.IdProducto,
+                IdTipoComida = entidad.IdTipoComida
             };
         }
     }

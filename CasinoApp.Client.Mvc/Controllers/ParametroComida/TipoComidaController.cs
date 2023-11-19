@@ -55,7 +55,7 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
             {
                 var tipocomida = tipoComidaResult.Result;
 
-                ViewBag.Ingredientes = ingredientes.ToDictionary(x => x.Id, x => x.IdUnidadPesaje);
+                ViewBag.Ingredientes = ingredientes.ToDictionary(x => x.Id, x => x.IdTipoComida);
                 return View(tipocomida);
             }
 
