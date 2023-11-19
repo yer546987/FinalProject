@@ -15,6 +15,6 @@ namespace CasinoApp.Aplication.Contracts
 
         public RequestResult<List<TipoComidaDto>> GetAll();
         public RequestResult<TipoComidaDto> GetById(int idTipoComida);
-        RequestResult<TipoComidaDto> Create(TipoComidaDto tipoComida);
+        public RequestResult<TipoComidaDto> Create(TipoComidaDto tipoComida);
     }
 }

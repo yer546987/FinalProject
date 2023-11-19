@@ -212,6 +212,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb0VtcGxlYWRvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Yeferson Beltran M/source/repos/SolucionCasinoApp/CasinoApp.Client.Mvc/Views/TipoProducto/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1Y3RvXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yeferson Beltran M/source/repos/SolucionCasinoApp/CasinoApp.Client.Mvc/Views/TipoProducto/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1Y3RvXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yeferson Beltran M/source/repos/SolucionCasinoApp/CasinoApp.Client.Mvc/Views/TipoProducto/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1Y3RvXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yeferson Beltran M/source/repos/SolucionCasinoApp/CasinoApp.Client.Mvc/Views/TipoProducto/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1Y3RvXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yeferson Beltran M/source/repos/SolucionCasinoApp/CasinoApp.Client.Mvc/Views/TipoProducto/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb1Byb2R1Y3RvXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Yeferson Beltran M/source/repos/SolucionCasinoApp/CasinoApp.Client.Mvc/Views/UnidadMedida/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pZGFkTWVkaWRhXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

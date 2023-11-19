@@ -17,7 +17,5 @@ namespace CasinoApp.Entities.Inventario
         public int Stock { get; set; }
       
         public double Cantidad { get; set; }
-
-
     }
 }

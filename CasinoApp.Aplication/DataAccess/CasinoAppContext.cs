@@ -209,6 +209,8 @@ public partial class CasinoAppContext : DbContext
         modelBuilder.Entity<TipoProducto>(entity =>
         {
             entity.ToTable("TipoProducto");
+            entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Tipo)
                 .IsRequired()

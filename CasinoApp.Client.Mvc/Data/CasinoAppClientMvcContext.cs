@@ -14,6 +14,7 @@ using CasinoApp.Entities.Inventario;
 using CasinoApp.Entities.Ingredientes;
 using CasinoApp.Entities.CostoCasino;
 using CasinoApp.Entities.UnidadMedida;
+using CasinoApp.Entities.Producto;
 
 namespace CasinoApp.Client.Mvc.Data
 {
@@ -44,5 +45,7 @@ namespace CasinoApp.Client.Mvc.Data
         public DbSet<CasinoApp.Entities.CostoCasino.CostoCasinoDto> CostoCasinoDto { get; set; }
 
         public DbSet<CasinoApp.Entities.UnidadMedida.UnidadMedidaDto> UnidadMedidaDto { get; set; }
+
+        public DbSet<CasinoApp.Entities.Producto.TipoProductoDto> TipoProductoDto { get; set; }
     }
 }

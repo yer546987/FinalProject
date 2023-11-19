@@ -1,4 +1,4 @@
-﻿using CasinoApp.Aplication.Contracts;
+﻿    using CasinoApp.Aplication.Contracts;
 using CasinoApp.Aplication.DataAccess;
 using CasinoApp.Aplication.Models;
 using CasinoApp.Entities.Empleado;
