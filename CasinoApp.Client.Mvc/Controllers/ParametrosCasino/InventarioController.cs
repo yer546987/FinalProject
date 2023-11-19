@@ -63,7 +63,7 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
 
-        public async Task<IActionResult> Create([Bind("Id,Producto,FechaVencimiento,Stock,IdUnidadMedida,Cantidad,Mecatos,IdInventario")] InventarioDto inventarioDto)
+        public async Task<IActionResult> Create([Bind("Id,IdProducto,FechaVencimiento,Stock,IdUnidadMedida,Cantidad,Mecatos,IdProducto")] InventarioDto inventarioDto)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Producto,FechaVencimiento,Stock,IdUnidadMedida,Cantidad,Mecatos,IdInventario")] InventarioDto inventarioDto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdProducto,FechaVencimiento,Stock,IdUnidadMedida,Cantidad,Mecatos,IdProducto")] InventarioDto inventarioDto)
         {
             if (id != inventarioDto.Id)
             {

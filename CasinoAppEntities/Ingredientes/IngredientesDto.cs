@@ -11,9 +11,9 @@ namespace CasinoApp.Entities.Ingredientes
     {
         [Key]
         public int Id { get; set; }
-        public int IdUnidadPesaje { get; set; }
-        public string Cantidad { get; set; }
-        public int IdInventario { get; set; }
+        public int IdTipoComida { get; set; }
+        public double Cantidad { get; set; }
+        public int IdProducto { get; set; }
 
     }
 }

@@ -42,7 +42,7 @@ namespace CasinoApp.Aplication.Services
                 entity.Precio = tipoComida.Precio;
                 entity.TiempoInicial = tipoComida.TiempoInicial;
                 entity.TiempoFinal = tipoComida.TiempoFinal;
-                entity.IdIngredientes = tipoComida.IdIngredientess;
+                
                 var result = _Context.TipoComida.Add(entity);
                 int rows = _Context.SaveChanges();
                 if (rows is 0)
@@ -57,7 +57,7 @@ namespace CasinoApp.Aplication.Services
                     Precio = result.Entity.Precio,
                     TiempoFinal = result.Entity.TiempoFinal,
                     TiempoInicial = result.Entity.TiempoInicial,
-                    IdIngredientess = result.Entity.IdIngredientes
+                   
 
                 };
                 return RequestResult<TipoComidaDto>.CreateSuccess(resultado);
@@ -92,7 +92,7 @@ namespace CasinoApp.Aplication.Services
                         Precio = item.Precio,
                         TiempoFinal = item.TiempoFinal,
                         TiempoInicial = item.TiempoInicial,
-                        IdIngredientess = item.IdIngredientes
+                        
                     });
                 }
                 return RequestResult<List<TipoComidaDto>>.CreateSuccess(result);
@@ -121,7 +121,7 @@ namespace CasinoApp.Aplication.Services
                     Precio = tipoComida.Precio,
                     TiempoFinal = tipoComida.TiempoFinal,
                     TiempoInicial = tipoComida.TiempoInicial,
-                    IdIngredientess = tipoComida.IdIngredientes
+                    
                 };
                 return RequestResult<TipoComidaDto>.CreateSuccess(resultado);
 
@@ -156,7 +156,7 @@ namespace CasinoApp.Aplication.Services
                 entidad.Precio = tipoComida.Precio;
                 entidad.TiempoInicial = tipoComida.TiempoInicial;
                 entidad.TiempoFinal = tipoComida.TiempoFinal;
-                entidad.IdIngredientes = tipoComida.IdIngredientess;
+               
 
                 _Context.Attach(entidad);
                 _Context.Entry(entidad).State = EntityState.Modified;
@@ -172,7 +172,7 @@ namespace CasinoApp.Aplication.Services
                     Precio = entidad.Precio,
                     TiempoInicial = entidad.TiempoInicial,
                     TiempoFinal = entidad.TiempoFinal,
-                    IdIngredientess = entidad.IdIngredientes
+                
                 };
 
                 return RequestResult<TipoComidaDto>.CreateSuccess(resultado);

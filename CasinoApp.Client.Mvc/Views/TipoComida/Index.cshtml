@@ -44,9 +44,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cronograma)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdIngredientess)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -74,9 +71,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Cronograma)
             </td>
-                <td>
-                    @ViewBag.ingredientes[item.IdIngredientess]
-                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

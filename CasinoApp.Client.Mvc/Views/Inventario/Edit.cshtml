@@ -14,14 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Producto" class="control-label"></label>
-                <input asp-for="Producto" class="form-control" />
-                <span asp-validation-for="Producto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaVencimiento" class="control-label"></label>
-                <input asp-for="FechaVencimiento" class="form-control" />
-                <span asp-validation-for="FechaVencimiento" class="text-danger"></span>
+                <label asp-for="IdProducto" class="control-label"></label>
+                <input asp-for="IdProducto" class="form-control" />
+                <span asp-validation-for="IdProducto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
@@ -29,24 +24,9 @@
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdUnidadMedida" class="control-label"></label>
-                <input asp-for="IdUnidadMedida" class="form-control" />
-                <span asp-validation-for="IdUnidadMedida" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Cantidad" class="control-label"></label>
                 <input asp-for="Cantidad" class="form-control" />
                 <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Mecatos" class="control-label"></label>
-                <input asp-for="Mecatos" class="form-control" />
-                <span asp-validation-for="Mecatos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdInventario" class="control-label"></label>
-                <input asp-for="IdInventario" class="form-control" />
-                <span asp-validation-for="IdInventario" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -27,6 +27,6 @@ namespace CasinoApp.Entities.TipoComida
 
         public bool Cronograma { get; set; }
 
-        public int IdIngredientess {  get; set; }
+   
     }
 }
