@@ -9,6 +9,7 @@ namespace CasinoApp.Entities.Http
         public bool IsSuccessful { get; set; }
         public bool IsError { get; set; }
         public List<string> ErrorsMessage { get; set; }
+        public byte[] RawBytes { get; set; }
         public T Result { get; set; }
 
         #endregion

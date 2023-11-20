@@ -10,6 +10,9 @@ using CasinoApp.Entities.Inventario;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.Ingredientes;
+using CasinoApp.Entities.Producto;
+using CasinoApp.Entities.TipoComida;
+using CasinoApp.Client.Mvc.Models.ViewModels;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
 {
@@ -23,106 +26,109 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosCasino
         }
 
         // GET: Inventario
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             MVAHttpClient client = new MVAHttpClient();
-            var resultado = client.Get<RequestResult<List<InventarioDto>>>("/api/InventarioControllers");
+            var resultado = client.Get<RequestResult<List<InventarioDto>>>("/api/Inventario");
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
             if (resultado.IsSuccessful)
             {
+                ViewBag.Producto = producto.ToDictionary(x => x.IdProducto, x => x.NombreProducto);
+
                 return View(resultado.Result);
             }
             return NotFound();
         }
 
         // GET: Inventario/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null || _context.InventarioDto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var inventarioDto = await _context.InventarioDto
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (inventarioDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var requestResult = client.Get<RequestResult<InventarioDto>>($"/api/Inventario/{id}");
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
+            if (requestResult.IsSuccessful)
             {
-                return NotFound();
+                var ingredientes = requestResult.Result;
+
+                ViewBag.Producto = producto.ToDictionary(x => x.IdProducto, x => x.NombreProducto);
+                return View(ingredientes);
             }
 
-            return View(inventarioDto);
+            return NotFound();
         }
 
         // GET: Inventario/Create
         public IActionResult Create()
         {
-            return View();
+            MVAHttpClient client = new MVAHttpClient();
+
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
+
+            var viewModel = new CuInventarioViewModel
+            {
+                Producto = producto
+            };
+
+            return View(viewModel);
         }
 
         // POST: Inventario/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-
-        public async Task<IActionResult> Create([Bind("Id,IdProducto,FechaVencimiento,Stock,IdUnidadMedida,Cantidad,Mecatos,IdProducto")] InventarioDto inventarioDto)
+        public IActionResult Create(CuInventarioViewModel inventarioDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<InventarioDto>>("/api/Inventario", inventarioDto.Inventario);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(inventarioDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(inventarioDto);
+            return NotFound();
         }
 
         // GET: Inventario/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
-            if (id == null || _context.InventarioDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<InventarioDto>>($"/api/Inventario/{id}");
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                var viewModel = new CuInventarioViewModel
+                {
+                    Inventario = resultado.Result,
+                    Producto = producto,
+                };
+
+                return View(viewModel);
             }
 
-            var inventarioDto = await _context.InventarioDto.FindAsync(id);
-            if (inventarioDto == null)
-            {
-                return NotFound();
-            }
-            return View(inventarioDto);
+            return NotFound();
         }
 
         // POST: Inventario/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdProducto,FechaVencimiento,Stock,IdUnidadMedida,Cantidad,Mecatos,IdProducto")] InventarioDto inventarioDto)
+        public IActionResult Edit(CuInventarioViewModel inventarioDto)
         {
-            if (id != inventarioDto.Id)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<InventarioDto>>("/api/Inventario/Update", inventarioDto.Inventario);
+
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(inventarioDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!InventarioDtoExists(inventarioDto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(inventarioDto);
+            return NotFound();
         }
 
         // GET: Inventario/Delete/5

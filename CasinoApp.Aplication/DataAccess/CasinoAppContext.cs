@@ -106,12 +106,12 @@ public partial class CasinoAppContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_InventarioMecatos");
 
-            entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.Ingredientes)
+            entity.HasOne(d => d.Producto).WithMany(p => p.Ingredientes)
                 .HasForeignKey(d => d.IdProducto)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Ingredientes_Producto");
 
-            entity.HasOne(d => d.IdTipoComidaNavigation).WithMany(p => p.Ingredientes)
+            entity.HasOne(d => d.TipoComida).WithMany(p => p.Ingredientes)
                 .HasForeignKey(d => d.IdTipoComida)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Ingredientes_TipoComida");
@@ -121,7 +121,7 @@ public partial class CasinoAppContext : DbContext
         {
             entity.ToTable("Inventario");
 
-            entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.Inventarios)
+            entity.HasOne(d => d.Producto).WithMany(p => p.Inventarios)
                 .HasForeignKey(d => d.IdProducto)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Inventario_Producto");
@@ -151,7 +151,8 @@ public partial class CasinoAppContext : DbContext
 
         modelBuilder.Entity<Producto>(entity =>
         {
-            entity.ToTable("IdProducto");
+            entity.ToTable("Producto");
+            entity.Property(e => e.Id);
 
             entity.Property(e => e.FechaVencimiento).HasColumnType("datetime");
             entity.Property(e => e.Nombre)
@@ -159,7 +160,7 @@ public partial class CasinoAppContext : DbContext
                 .HasMaxLength(100)
                 .IsFixedLength();
 
-            entity.HasOne(d => d.IdTipoProductoNavigation).WithMany(p => p.Productos)
+            entity.HasOne(d => d.TipoProducto).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.IdTipoProducto)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Producto_TipoProducto");

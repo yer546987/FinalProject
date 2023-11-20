@@ -1,4 +1,4 @@
-﻿@model CasinoApp.Entities.Ingredientes.IngredientesDto
+﻿@model CasinoApp.Client.Mvc.Models.ViewModels.CuIngredientesViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,16 +12,30 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-          
             <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
+                <label asp-for="Ingredientes.Cantidad" class="control-label"></label>
+                <input asp-for="Ingredientes.Cantidad" class="form-control" />
+                <span asp-validation-for="Ingredientes.Cantidad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdProducto" class="control-label"></label>
-                <input asp-for="IdProducto" class="form-control" />
-                <span asp-validation-for="IdProducto" class="text-danger"></span>
+                <label for="IdProducto">Producto</label>
+                <select asp-for="Ingredientes.IdProducto" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var producto in Model.Productos)
+                    {
+                        <option value="@producto.IdProducto">@producto.NombreProducto</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="IdTipoComida">Tipo de comida</label>
+                <select asp-for="Ingredientes.IdTipoComida" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var tipoComida in Model.TipoComidas)
+                    {
+                        <option value="@tipoComida.Id">@tipoComida.Nombre</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

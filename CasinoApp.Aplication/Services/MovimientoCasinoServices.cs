@@ -3,14 +3,15 @@ using CasinoApp.Aplication.DataAccess;
 using CasinoApp.Aplication.Models;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.MovimientoCasino;
-using CasinoApp.Entities.TipoComida;
+using ClosedXML.Excel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
 
 namespace CasinoApp.Aplication.Services
 {
@@ -21,6 +22,7 @@ namespace CasinoApp.Aplication.Services
 
         public MovimientoCasinoServices() 
         {
+            
             _Context = new CasinoAppContext();
         }
         public RequestResult<MovimientoCasinoDto> Create(MovimientoCasinoDto movimientoCasino)
@@ -154,6 +156,51 @@ namespace CasinoApp.Aplication.Services
             catch (Exception ex)
             {
                 return RequestResult<MovimientoCasinoDto>.CreateError($"Ha ocurrido un error: {ex.Message}");
+            }
+        }
+
+        public HttpResponseMessage ExportarExcel()
+        {
+            try
+            {
+                var movimientoCasinos = _Context.MovimientoCasinos.ToList();
+
+                using (var workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("MovimientosCasino");
+
+                    // Configuramos las columnas en la hoja de Excel
+                    worksheet.Cell(1, 1).InsertData(movimientoCasinos);
+
+                    // Guardamos el paquete en un MemoryStream
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        workbook.SaveAs(memoryStream);
+
+                        // Construimos la respuesta HTTP
+                        var result = new HttpResponseMessage(HttpStatusCode.OK)
+                        {
+                            Content = new ByteArrayContent(memoryStream.ToArray())
+                        };
+
+                        // Configuramos los encabezados de la respuesta
+                        result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                        {
+                            FileName = "MovimientosCasino.xlsx"
+                        };
+                        result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+                        return result;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al exportar a Excel: {ex.Message}");
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent($"Error al exportar a Excel: {ex.Message}")
+                };
             }
         }
 

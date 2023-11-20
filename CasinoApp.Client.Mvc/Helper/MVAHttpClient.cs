@@ -20,6 +20,7 @@ namespace CasinoApp.Client.Helper
         public MVAHttpClient()
         {
             _httpClient = new HttpClient();
+          
         }
         #endregion
 
@@ -33,7 +34,6 @@ namespace CasinoApp.Client.Helper
                 return deserializeResponse<T>(response);
             }
         }
-
         public T Post<T>(string url, object body)
         {
             using (HttpRequestMessage request = createRequest(HttpMethod.Post, url))

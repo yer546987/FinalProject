@@ -10,7 +10,7 @@ namespace CasinoApp.Aplication.Contracts
 {
     public interface IInventarioServices
     {
-        public InventarioDto Update(InventarioDto inventario);
+        public RequestResult<InventarioDto> Update(InventarioDto inventario);
         public bool Delete(int idinventario);
 
         public RequestResult<List<InventarioDto>> GetAll();

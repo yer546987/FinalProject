@@ -1,4 +1,4 @@
-﻿@model CasinoApp.Entities.Inventario.InventarioDto
+﻿@model CasinoApp.Client.Mvc.Models.ViewModels.CuInventarioViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,21 +12,27 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Inventario.Id" />
             <div class="form-group">
-                <label asp-for="IdProducto" class="control-label"></label>
-                <input asp-for="IdProducto" class="form-control" />
-                <span asp-validation-for="IdProducto" class="text-danger"></span>
+                <label for="IdProducto">Grupo de empleado</label>
+                <select asp-for="Inventario.IdProducto" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var producto in Model.Producto)
+                    {
+                        <option value="@producto.IdProducto">@producto.NombreProducto</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Stock" class="control-label"></label>
-                <input asp-for="Stock" class="form-control" />
-                <span asp-validation-for="Stock" class="text-danger"></span>
+                <label asp-for="Inventario.Stock" class="control-label"></label>
+                <input asp-for="Inventario.Stock" class="form-control" />
+                <span asp-validation-for="Inventario.Stock" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
+                <label asp-for="Inventario.Cantidad" class="control-label"></label>
+                <input asp-for="Inventario.Cantidad" class="form-control" />
+                <span asp-validation-for="Inventario.Cantidad" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -1,8 +1,11 @@
-﻿using CasinoApp.Aplication.Services;
+﻿using CasinoApp.Aplication.Contracts;
+using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.MovimientoCasino;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace CasinoApp.Api.Controllers.ParametrosCasino
 {
@@ -60,5 +63,7 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
             }
             return null;
         }
+       
+
     }
 }

@@ -10,6 +10,12 @@ using CasinoApp.Entities.Ingredientes;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Empleado;
 using CasinoApp.Entities.Http;
+using CasinoApp.Entities.GrupoEmpleado;
+using CasinoApp.Entities.TipoEmpleado;
+using CasinoApp.Entities.Producto;
+using CasinoApp.Entities.TipoComida;
+using CasinoApp.Entities.TipoDocumento;
+using CasinoApp.Client.Mvc.Models.ViewModels;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
 {
@@ -23,106 +29,117 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametroComida
         }
 
         // GET: IngredientesDtoes
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             MVAHttpClient client = new MVAHttpClient();
             var resultado = client.Get<RequestResult<List<IngredientesDto>>>("/api/Ingredientes");
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
             if (resultado.IsSuccessful)
             {
+                ViewBag.Producto = producto.ToDictionary(x => x.IdProducto, x => x.NombreProducto);
+                ViewBag.TipoComida = tipoComida.ToDictionary(x => x.Id, x => x.Nombre);
+
                 return View(resultado.Result);
             }
             return NotFound();
         }
 
         // GET: IngredientesDtoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public  IActionResult  Details(int? id)
         {
-            if (id == null || _context.IngredientesDto == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var ingredientesDto = await _context.IngredientesDto
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ingredientesDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var requestResult = client.Get<RequestResult<IngredientesDto>>($"/api/Ingredientes/{id}");
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+            if (requestResult.IsSuccessful)
             {
-                return NotFound();
+                var ingredientes = requestResult.Result;
+
+                ViewBag.Producto = producto.ToDictionary(x => x.IdProducto, x => x.NombreProducto);
+                ViewBag.TipoComida = tipoComida.ToDictionary(x => x.Id, x => x.Nombre);
+                return View(ingredientes);
             }
 
-            return View(ingredientesDto);
+            return NotFound();
         }
 
         // GET: IngredientesDtoes/Create
         public IActionResult Create()
         {
-            return View();
+            MVAHttpClient client = new MVAHttpClient();
+
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+
+            var viewModel = new CuIngredientesViewModel
+            {
+                Productos = producto,
+                TipoComidas = tipoComida
+            };
+
+            return View(viewModel);
         }
 
         // POST: IngredientesDtoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdTipoComida,Cantidad,IdProducto,NombreUnidadPesaje")] IngredientesDto ingredientesDto)
+        public IActionResult Create(CuIngredientesViewModel ingredientesDto)
         {
-            if (ModelState.IsValid)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<IngredientesDto>>("/api/Ingredientes", ingredientesDto.Ingredientes);
+            if (resultado.IsSuccessful)
             {
-                _context.Add(ingredientesDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", resultado.Result);
             }
-            return View(ingredientesDto);
+            return NotFound();
         }
 
         // GET: IngredientesDtoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public  IActionResult  Edit(int? id)
         {
-            if (id == null || _context.IngredientesDto == null)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Get<RequestResult<IngredientesDto>>($"/api/Ingredientes/{id}");
+            var producto = client.Get<RequestResult<List<ProductoDto>>>("/api/Producto").Result;
+            var tipoComida = client.Get<RequestResult<List<TipoComidaDto>>>("/api/TipoComida").Result;
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                var viewModel = new CuIngredientesViewModel
+                {
+                    Ingredientes = resultado.Result,
+                    Productos = producto,
+                    TipoComidas = tipoComida,
+                };
+
+                return View(viewModel);
             }
 
-            var ingredientesDto = await _context.IngredientesDto.FindAsync(id);
-            if (ingredientesDto == null)
-            {
-                return NotFound();
-            }
-            return View(ingredientesDto);
+            return NotFound();
         }
 
         // POST: IngredientesDtoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdTipoComida,Cantidad,IdProducto,NombreUnidadPesaje")] IngredientesDto ingredientesDto)
+        public IActionResult Edit(CuIngredientesViewModel ingredientesDto)
         {
-            if (id != ingredientesDto.Id)
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<IngredientesDto>>("/api/Ingredientes/Update", ingredientesDto.Ingredientes);
+
+
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(ingredientesDto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!IngredientesDtoExists(ingredientesDto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(ingredientesDto);
+            return NotFound();
         }
 
         // GET: IngredientesDtoes/Delete/5

@@ -47,5 +47,7 @@ namespace CasinoApp.Client.Mvc.Data
         public DbSet<CasinoApp.Entities.UnidadMedida.UnidadMedidaDto> UnidadMedidaDto { get; set; }
 
         public DbSet<CasinoApp.Entities.Producto.TipoProductoDto> TipoProductoDto { get; set; }
+
+        public DbSet<CasinoApp.Entities.Producto.ProductoDto> ProductoDto { get; set; }
     }
 }

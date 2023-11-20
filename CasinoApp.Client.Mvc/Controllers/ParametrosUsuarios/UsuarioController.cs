@@ -10,6 +10,10 @@ using CasinoApp.Entities.Usuario;
 using CasinoApp.Client.Helper;
 using CasinoApp.Entities.Http;
 using CasinoApp.Entities.Ingredientes;
+using CasinoApp.Entities.Login;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace CasinoApp.Client.Mvc.Controllers.ParametrosUsuarios
 {
@@ -21,146 +25,56 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosUsuarios
         {
             _context = context;
         }
-
-        public async Task<IActionResult> Index()
-        {
-            MVAHttpClient client = new MVAHttpClient();
-            var resultado = client.Get<RequestResult<List<UsuarioDto>>>("/api/Usuario");
-            if (resultado.IsSuccessful)
-            {
-                return View(resultado.Result);
-            }
-            return NotFound();
-        }
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.UsuarioDto == null)
-            {
-                return NotFound();
-            }
-
-            var usuarioDto = await _context.UsuarioDto
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarioDto == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuarioDto);
-        }
-
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Usuario1")] UsuarioDto usuarioDto)
+        public async Task<IActionResult> Login(Login login)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(usuarioDto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(usuarioDto);
-        }
+            MVAHttpClient client = new MVAHttpClient();
+            var resultado = client.Post<RequestResult<UsuarioDto>>("/api/Usuario", login);
 
-        // GET: UsuarioDtoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.UsuarioDto == null)
+            if (resultado.IsSuccessful)
             {
-                return NotFound();
-            }
 
-            var usuarioDto = await _context.UsuarioDto.FindAsync(id);
-            if (usuarioDto == null)
-            {
-                return NotFound();
-            }
-            return View(usuarioDto);
-        }
+                var nombreUsuario = resultado.Result.Nombre;
+                var rol = resultado.Result.Rol;
 
-        // POST: UsuarioDtoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Usuario1")] UsuarioDto usuarioDto)
-        {
-            if (id != usuarioDto.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (rol == 1)
                 {
-                    _context.Update(usuarioDto);
-                    await _context.SaveChangesAsync();
+
+
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, nombreUsuario),
+                        new Claim(ClaimTypes.Role, "Admin"),
+                    };
+                    var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(userIdentity);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!UsuarioDtoExists(usuarioDto.Id))
+                    var claims = new List<Claim>
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        new Claim(ClaimTypes.Name, nombreUsuario),
+                        new Claim(ClaimTypes.Role, "Usuario"),
+                    };
+                    var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(userIdentity);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
-            return View(usuarioDto);
+
+            return RedirectToAction("Index");
         }
-
-        // GET: UsuarioDtoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Logout()
         {
-            if (id == null || _context.UsuarioDto == null)
-            {
-                return NotFound();
-            }
-
-            var usuarioDto = await _context.UsuarioDto
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarioDto == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuarioDto);
-        }
-
-        // POST: UsuarioDtoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.UsuarioDto == null)
-            {
-                return Problem("Entity set 'CasinoAppClientMvcContext.UsuarioDto'  is null.");
-            }
-            var usuarioDto = await _context.UsuarioDto.FindAsync(id);
-            if (usuarioDto != null)
-            {
-                _context.UsuarioDto.Remove(usuarioDto);
-            }
             
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool UsuarioDtoExists(int id)
-        {
-          return _context.UsuarioDto.Any(e => e.Id == id);
+            await HttpContext.SignOutAsync();          
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -1,9 +1,12 @@
-﻿using CasinoApp.Aplication.Services;
+﻿using CasinoApp.Aplication.Contracts;
+using CasinoApp.Aplication.Services;
 using CasinoApp.Entities.Http;
+using CasinoApp.Entities.Login;
 using CasinoApp.Entities.Usuario;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CasinoApp.Api.Controllers.ParametrosUsuarios
 {
@@ -11,54 +14,18 @@ namespace CasinoApp.Api.Controllers.ParametrosUsuarios
     [ApiController]
     public class UsuarioController : Controller
     {
-        private UsuariosServices services;
+        private UserService services;
         public UsuarioController()
         {
-            services = new UsuariosServices();
-        }
-
-        /// <summary>
-        /// Este metodo retorna todas las especies registradas
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public RequestResult<List<UsuarioDto>> GetAll()
-        {
-            return services.GetAll();
-        }
-
-
-        /// <summary>
-        /// Este metodo retorna una especie por id
-        /// </summary>
-        /// <param name="id">Identificador de la especie</param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("{id}")]
-        public RequestResult<UsuarioDto> GetById([FromRoute] int id)
-        {
-            return services.GetById(id);
+            services = new UserService();
         }
 
         [HttpPost]
-        public RequestResult<UsuarioDto> Create([FromBody] UsuarioDto usuario)
+        public RequestResult<UsuarioDto> GetUsers(Login login)
+
         {
-            if (ModelState.IsValid)
-            {
-                return services.Create(usuario);
-            }
-            return RequestResult<UsuarioDto>.CreateNoSuccess("El modelo no es valido");
+            return services.GetUsers(login.Usuario, login.Pass);          
         }
 
-
-        [HttpPut]
-        public UsuarioDto Update([FromBody] UsuarioDto usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                return services.Update(usuario);
-            }
-            return null;
-        }
     }
 }

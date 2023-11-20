@@ -52,9 +52,9 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
             return RequestResult<InventarioDto>.CreateNoSuccess("El modelo no es valido");
         }
 
-
-        [HttpPut]
-        public InventarioDto Update([FromBody] InventarioDto inventario)
+        [HttpPost]
+        [Route("Update")]
+        public RequestResult<InventarioDto> Update([FromBody] InventarioDto inventario)
         {
             if (ModelState.IsValid)
             {

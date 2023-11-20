@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var isAuthenticated = User.Identity.IsAuthenticated;
+    var userName = isAuthenticated ? User.Identity.Name : "Iniciar sesión";
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -48,25 +52,26 @@
             <div class="sidebar-heading">
                 Interfaces
             </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Parámetros funcionario</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Parametros:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="TipoEmpleado" asp-action="Index">Tipo de Funcionario</a>
-                        <a class="collapse-item" asp-area="" asp-controller="TipoDocumento" asp-action="Index">Tipo de Documento</a>
-                        <a class="collapse-item" asp-area="" asp-controller="GrupoEmpleado" asp-action="Index">Grupo de funcionario</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Empleado" asp-action="Index">Registro de funcionario</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Parámetros funcionario</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Parametros:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TipoEmpleado" asp-action="Index">Tipo de Funcionario</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TipoDocumento" asp-action="Index">Tipo de Documento</a>
+                            <a class="collapse-item" asp-area="" asp-controller="GrupoEmpleado" asp-action="Index">Grupo de funcionario</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Empleado" asp-action="Index">Registro de funcionario</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
+                </li>
+            }
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -79,28 +84,34 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Parametros:</h6>
                         <a class="collapse-item" asp-area="" asp-controller="MovimientoCasino" asp-action="Index">Movimiento de casino</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CostoCasino" asp-action="Index">Costo de casino</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="collapse-item" asp-area="" asp-controller="CostoCasino" asp-action="Index">Costo de casino</a>
+                        }
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                   aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Registro Comida</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Parametros:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="TipoComida" asp-action="Index">Tipo de comida</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Ingredientes" asp-action="Index">Ingredientes</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Inventario" asp-action="Index">Inventario</a>
-                        <a class="collapse-item" asp-area="" asp-controller="TipoProducto" asp-action="Index">Tipo de producto</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                       aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Registro Comida</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Parametros:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TipoComida" asp-action="Index">Tipo de comida</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Ingredientes" asp-action="Index">Ingredientes</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Inventario" asp-action="Index">Inventario</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Producto" asp-action="Index">Producto</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TipoProducto" asp-action="Index">Tipo de producto</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            }
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -157,18 +168,32 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nombre usuario</span>
-                                <img class="img-profile rounded-circle"
-                                     src="~/img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@userName</span>
+                                <img class="img-profile rounded-circle" src="~/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Logout">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Cerrar Sesión
-                                </a>
-                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Logout">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Cerrar Sesión
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Index">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Iniciar Sesión
+                                    </a>
+                                </div>
+                            }
                         </li>
                     </ul>
                 </nav>

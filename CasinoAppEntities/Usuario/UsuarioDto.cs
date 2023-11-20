@@ -15,5 +15,9 @@ namespace CasinoApp.Entities.Usuario
         public string Nombre { get; set; }
 
         public string Usuario1 { get; set; }
+
+        public string Pass { get; set; }
+
+        public int Rol { get; set; }
     }
 }

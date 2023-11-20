@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http;
-@model CasinoApp.Client.Mvc.Models.ViewModels.ModeEF
-
+@model CasinoApp.Client.Mvc.Models.CrearMovimiento
 @{
     ViewData["Title"] = "Casino";
     // var mensaje = Context.Session.GetString("Mensaje") ?? "";
@@ -20,45 +19,46 @@
     <div class="col-md-8">
         <div class="col-md-12">
             <div class="container">
-                <form asp-action="FindEmployed" method="post" style="margin-top: 70px;">
+                <form asp-action="Create" method="post" style="margin-top: 70px;">
                     <div class="form-group mt-4">
                         <label for="tipoComida" class="form-label"><strong>Alimentos:</strong></label>
-                        <select class="form-control form-control-lg" id="tipoComida" name="TipoComida" required style="font-size: 23px;">
+                        <select class="form-control form-control-lg" asp-for="IdTipoComida" required style="font-size: 23px;">
                             <option value="0">Seleccione un alimento</option>
-@*                             @foreach (var tipoComida in ViewBag.AvailableFoodTypes)
+                            @foreach (var tipoComida in ViewBag.TipoComida)
                             {
-                                <option value="@tipoComida.Id @(tipoComida.Id==ViewBag.SelectedFoodTypeId ? "selected" : "" )">@tipoComida.Nombre</option>
-                            } *@
+                                <option value="@tipoComida.Id">@tipoComida.Nombre</option>
+                            }
                         </select>
                     </div>
-                    <div class="form-group row g-8 align-items-center">
-                        <div class="col-md-12">
-                            <label asp-for="empleado.IdentificacionE" class="form-label"><strong>Ingrese su identificación:</strong></label>
-                        </div>
-                        <div class="col-md-12">
-                            <input asp-for="empleado.IdentificacionE" autofocus class="form-control form-control-lg" type="number" placeholder="Ingrese número de identificación" min="0" required style="font-size: 23px;">
-                        </div>
+                     <div class="form-group row g-8 align-items-center">
+                    <div class="col-md-12">
+                    <label  class="form-label"><strong>Ingrese su identificación:</strong></label>
+                    </div>
+                    <div class="col-md-12">
+                            <input asp-for="Identificacion" autofocus class="form-control form-control-lg" type="number" placeholder="Ingrese número de identificación" min="0" required style="font-size: 23px;">
+                    </div>
                     </div>
                 </form>
             </div>
         </div>
-@*         <div class="container">
-            <div class="col-lg-12" style="margin-top: 40px;">
-                @if (!string.IsNullOrEmpty(mensaje))
-                {
-                    <div class="alert alert-info" id="mensaje-alert">
-                        @mensaje
-                    </div>
-                }
-            </div>
-        </div> *@
+       @*  @*       <div class="container">
+        <div class="col-lg-12" style="margin-top: 40px;">
+        @if (!string.IsNullOrEmpty(mensaje))
+        {
+        <div class="alert alert-info" id="mensaje-alert">
+        @mensaje
+        </div>
+        }
+        </div>
+        </div>
         <script>
-            var mensajeAlert = document.getElementById('mensaje-alert');
-            var time = 4000;
+        var mensajeAlert = document.getElementById('mensaje-alert');
+        var time = 4000;
 
-            setTimeout(function () {
-                mensajeAlert.style.display = 'none';
-            }, time);
+        setTimeout(function () {
+        mensajeAlert.style.display = 'none';
+        }, time);
         </script>
-    </div>
-</div>
+        </div>
+        </div>
+ *@

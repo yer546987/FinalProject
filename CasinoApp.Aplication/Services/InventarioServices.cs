@@ -27,8 +27,9 @@ namespace CasinoApp.Aplication.Services
             {
                 if (inventario is null)
                     return RequestResult<InventarioDto>.CreateNoSuccess("Los datos son requeridos");
-              
                 Inventario entity = new Inventario();
+                entity.Cantidad = inventario.Cantidad;
+                entity.Stock = inventario.Stock;
                 entity.IdProducto = inventario.IdProducto;
                 var result = _Context.Inventarios.Add(entity);
                 int rows = _Context.SaveChanges();
@@ -72,8 +73,6 @@ namespace CasinoApp.Aplication.Services
                 }
                 return RequestResult<List<InventarioDto>>.CreateSuccess(result);
 
-
-
             }
             catch (Exception)
             {
@@ -96,8 +95,6 @@ namespace CasinoApp.Aplication.Services
                     Stock = inventario.Stock
                 };
                 return RequestResult<InventarioDto>.CreateSuccess(resultado);
-
-
             }
             catch (Exception ex)
             {
@@ -105,25 +102,43 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public InventarioDto Update(InventarioDto inventario)
+        public RequestResult<InventarioDto> Update(InventarioDto inventario)
         {
-            if (inventario is null) return null;
-            if (inventario.Id is 0) return null;          
-            var entidad = _Context.Inventarios
-                                .Where(x => x.Id.Equals(inventario.Id))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.IdProducto = inventario.IdProducto;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new InventarioDto()
+            try
             {
-                IdProducto = entidad.IdProducto,
-                Cantidad = entidad.Cantidad,               
-                Id = entidad.Id,               
-                Stock = entidad.Stock
-            };
+                if (inventario == null || inventario.Id == 0)
+                {
+                    return RequestResult<InventarioDto>.CreateNoSuccess("Datos incorrectos para la actualización.");
+                }
+
+                var entidad = _Context.Inventarios
+                                      .Where(x => x.Id.Equals(inventario.Id))
+                                      .FirstOrDefault();
+
+                if (entidad == null)
+                {
+                    return RequestResult<InventarioDto>.CreateNoSuccess("Inventario no encontrado para la actualización.");
+                }
+
+                entidad.IdProducto = inventario.IdProducto;
+
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                return RequestResult<InventarioDto>.CreateSuccess(new InventarioDto
+                {
+                    IdProducto = entidad.IdProducto,
+                    Cantidad = entidad.Cantidad,
+                    Id = entidad.Id,
+                    Stock = entidad.Stock
+                });
+            }
+            catch (Exception ex)
+            {
+                return RequestResult<InventarioDto>.CreateError($"Ha ocurrido un error: {ex.Message}");
+            }
         }
+
     }
 }

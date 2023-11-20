@@ -27,9 +27,10 @@ namespace CasinoApp.Aplication.Services
             {
                 if (ingredientes is null)
                     return RequestResult<IngredientesDto>.CreateNoSuccess("Los datos son requeridos");
-               
                 Ingrediente entity = new Ingrediente();
                 entity.Cantidad = ingredientes.Cantidad;
+                entity.IdProducto = ingredientes.IdProducto;
+                entity.IdTipoComida = ingredientes.IdTipoComida;
                 var result = _Context.Ingredientes.Add(entity);
                 int rows = _Context.SaveChanges();
                 if (rows is 0)
@@ -102,25 +103,43 @@ namespace CasinoApp.Aplication.Services
             }
         }
 
-        public IngredientesDto Update(IngredientesDto ingredientes)
+        public RequestResult<IngredientesDto> Update(IngredientesDto ingredientes)
         {
-            if (ingredientes is null) return null;
-            if (ingredientes.Id is 0) return null;
-            var entidad = _Context.Ingredientes
-                                .Where(x => x.Id.Equals(ingredientes.Id))
-                                .FirstOrDefault();
-            if (entidad == null) return null;
-            entidad.Cantidad = ingredientes.Cantidad;
-            _Context.Attach(entidad);
-            _Context.Entry(entidad).State = EntityState.Modified;
-            _Context.SaveChanges();
-            return new IngredientesDto()
+            try
             {
-                Cantidad = entidad.Cantidad,
-                Id = entidad.Id,
-                IdProducto = entidad.IdProducto,
-                IdTipoComida = entidad.IdTipoComida
-            };
+                if (ingredientes == null || ingredientes.Id == 0)
+                {
+                    return RequestResult<IngredientesDto>.CreateNoSuccess("Datos incorrectos para la actualización.");
+                }
+
+                var entidad = _Context.Ingredientes
+                                      .Where(x => x.Id.Equals(ingredientes.Id))
+                                      .FirstOrDefault();
+
+                if (entidad == null)
+                {
+                    return RequestResult<IngredientesDto>.CreateNoSuccess("Ingrediente no encontrado para la actualización.");
+                }
+
+                entidad.Cantidad = ingredientes.Cantidad;
+
+                _Context.Attach(entidad);
+                _Context.Entry(entidad).State = EntityState.Modified;
+                _Context.SaveChanges();
+
+                return RequestResult<IngredientesDto>.CreateSuccess(new IngredientesDto
+                {
+                    Cantidad = entidad.Cantidad,
+                    Id = entidad.Id,
+                    IdProducto = entidad.IdProducto,
+                    IdTipoComida = entidad.IdTipoComida
+                });
+            }
+            catch (Exception ex)
+            {
+                return RequestResult<IngredientesDto>.CreateError($"Ha ocurrido un error: {ex.Message}");
+            }
         }
+
     }
 }
