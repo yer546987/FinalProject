@@ -25,10 +25,12 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosUsuarios
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(Login login)
         {
@@ -37,14 +39,11 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosUsuarios
 
             if (resultado.IsSuccessful)
             {
-
                 var nombreUsuario = resultado.Result.Nombre;
                 var rol = resultado.Result.Rol;
 
                 if (rol == 1)
                 {
-
-
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, nombreUsuario),
@@ -53,6 +52,8 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosUsuarios
                     var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -64,16 +65,18 @@ namespace CasinoApp.Client.Mvc.Controllers.ParametrosUsuarios
                     var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(userIdentity);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                    return RedirectToAction("Index", "Home");
                 }
-                return RedirectToAction("Index", "Home");
             }
 
+            TempData["MensajeError"] = "Usuario o contraseña incorrecta";
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> Logout()
         {
-            
-            await HttpContext.SignOutAsync();          
+            await HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
     }

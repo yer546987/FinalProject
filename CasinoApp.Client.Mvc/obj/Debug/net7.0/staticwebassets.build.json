@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FyUWtE0xfT8h49v6oVRn6kLG9zvQUYo2obt5Q6D8xM4=",
+  "Hash": "h1jRaVZlb+q1Gy8wGxpr3gxqhHdZw7TKfZfaKS7F6xg=",
   "Source": "CasinoApp.Client.Mvc",
   "BasePath": "_content/CasinoApp.Client.Mvc",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\CasinoApp.Client.Mvc.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\Casino.css",
+      "SourceId": "CasinoApp.Client.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\",
+      "BasePath": "_content/CasinoApp.Client.Mvc",
+      "RelativePath": "css/Casino.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Casino.css"
+    },
+    {
+      "Identity": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\Login.css",
+      "SourceId": "CasinoApp.Client.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\",
+      "BasePath": "_content/CasinoApp.Client.Mvc",
+      "RelativePath": "css/Login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Login.css"
     },
     {
       "Identity": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\sb-admin-2.css",

@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\CasinoApp.Client.Mvc.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\Casino.css",
+      "PackagePath": "staticwebassets\\css\\Casino.css"
+    },
+    {
+      "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\Login.css",
+      "PackagePath": "staticwebassets\\css\\Login.css"
+    },
+    {
       "Id": "C:\\Users\\Yeferson Beltran M\\source\\repos\\SolucionCasinoApp\\CasinoApp.Client.Mvc\\wwwroot\\css\\sb-admin-2.css",
       "PackagePath": "staticwebassets\\css\\sb-admin-2.css"
     },

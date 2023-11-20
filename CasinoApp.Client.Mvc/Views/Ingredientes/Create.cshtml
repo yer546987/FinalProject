@@ -4,50 +4,74 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>IngredientesDto</h4>
+<div class="row text-center">
+    <div class="col-md-12">
+        <h3>Crear ingrediente</h3>
+    </div>
+</div>
 <hr />
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ingredientes.Cantidad" class="control-label"></label>
-                <input asp-for="Ingredientes.Cantidad" class="form-control" />
-                <span asp-validation-for="Ingredientes.Cantidad" class="text-danger"></span>
+            <div class="form-group row g-3 align-items-center">
+                <div class="col-md-4">
+                    <label asp-for="Ingredientes.Cantidad" class="control-label">Cantidad</label>
+                </div>
+                <div class="col-md-8">
+                    <input asp-for="Ingredientes.Cantidad" class="form-control" />
+                    <span asp-validation-for="Ingredientes.Cantidad" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="IdProducto">Producto</label>
-                <select asp-for="Ingredientes.IdProducto" class="form-control">
-                    <option value="">Seleccione...</option>
-                    @foreach (var producto in Model.Productos)
-                    {
-                        <option value="@producto.IdProducto">@producto.NombreProducto</option>
-                    }
-                </select>
+            <div class="form-group row g-3 align-items-center">
+                <div class="col-md-4">
+                    <label for="IdProducto">Producto</label>
+                </div>
+                <div class="col-md-8">
+                    <select asp-for="Ingredientes.IdProducto" class="form-control">
+                        <option value="">Seleccione...</option>
+                        @foreach (var producto in Model.Productos)
+                        {
+                            <option value="@producto.IdProducto">@producto.NombreProducto</option>
+                        }
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="IdTipoComida">Tipo de comida</label>
-                <select asp-for="Ingredientes.IdTipoComida" class="form-control">
-                    <option value="">Seleccione...</option>
-                    @foreach (var tipoComida in Model.TipoComidas)
-                    {
-                        <option value="@tipoComida.Id">@tipoComida.Nombre</option>
-                    }
-                </select>
+            <div class="form-group row g-3 align-items-center">
+                <div class="col-md-4">
+                    <label for="IdTipoComida">Tipo de comida</label>
+                </div>
+                <div class="col-md-8">
+                    <select asp-for="Ingredientes.IdTipoComida" class="form-control">
+                        <option value="">Seleccione...</option>
+                        @foreach (var tipoComida in Model.TipoComidas)
+                        {
+                            <option value="@tipoComida.Id">@tipoComida.Nombre</option>
+                        }
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <center>
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <button type="submit" value="Crear" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModalCenter">
+                            Crear
+                        </button> |
+                        <a asp-action="Index" class="text-decoration-none">
+                            <button value="Volver" class="btn btn-sm btn-secondary" type="button">
+                                Volver
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </center>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -44,8 +44,5 @@ namespace CasinoApp.Api.Controllers.ParametrosCasino
 
             return RequestResult<MovimientoCasinoDto>.CreateNoSuccess("El identificador o el tipo de comida llegaron vacíos");
         }
-
-
-
     }
 }
